@@ -1,12 +1,12 @@
 
-## Install Dependencies
-```bash
-npm install
-```
 ## Getting Started
 ```bash
 git clone https://github.com/TZYOUNGDEVELOPERS/smartprogrammers
 
+```
+## Install Dependencies
+```bash
+npm install
 ```
 First, run the development server:
 
@@ -39,6 +39,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
  git add .
 
  ```
+Remove .env from Staged Commit
+```bash
+git rm --cached .env
+```
+
+OR
+
+```bash
+git restore --staged .env
+``` 
 
  Commit
 

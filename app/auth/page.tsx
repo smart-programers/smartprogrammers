@@ -193,7 +193,7 @@ const router = useRouter()
           )}
         />
         <div className="flex justify-center items-center">
-        <Button type="submit">Register</Button></div>
+        <Button type="submit">Sign Up</Button></div>
       </form>
     </Form>
           </CardContent>
