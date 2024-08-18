@@ -76,7 +76,7 @@ interface SidebarItemProps {
 function SidebarItem({ icon, label, isHovered, isActive,href }: SidebarItemProps) {
   return (
     <Link
-      className={`flex items-center justify-between p-2 rounded-lg w-full transition-all duration-300 ${
+      className={`flex items-center  p-2 rounded-lg w-full transition-all duration-300 ${
         isActive ? "bg-blue-800 w-full" : "hover:bg-gray-700"
       }`}
       href={href}
