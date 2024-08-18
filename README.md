@@ -1,12 +1,12 @@
 
-## Install Dependencies
-```bash
-npm install
-```
 ## Getting Started
 ```bash
 git clone https://github.com/TZYOUNGDEVELOPERS/smartprogrammers
 
+```
+## Install Dependencies
+```bash
+npm install
 ```
 First, run the development server:
 
