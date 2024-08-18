@@ -41,9 +41,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <NextTopLoader />
+        <NextTopLoader />
         <Toaster/> 
-        {children}</body>
+        {children}
+      </body>
     </html>
   );
 }
