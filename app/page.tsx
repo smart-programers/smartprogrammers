@@ -12,7 +12,7 @@ const MainLayout: React.FC = () => {
       <Sidebar/>
 
       {/* Main Content */}
-      <div className="ml-24 flex-1">
+      <div className="ml-20 flex-1">
         <TopBar />
         <MainSection />
       </div>
