@@ -5,7 +5,7 @@ import { FaHome, FaUser, FaCog, FaComment, FaBook } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-export default function Sidebar({children}:Readonly<{children:React.ReactNode}>) {
+export default function Sidebar() {
   const [isHovered, setIsHovered] = useState(false);
   const pathname = usePathname();
 
@@ -57,13 +57,7 @@ export default function Sidebar({children}:Readonly<{children:React.ReactNode}>)
         </div>
       </div>
     </div>
-    <section className={cn(
-      
-        isHovered ? "ml-64" : "",
-  
-      )}>
   {children}
-  </section>
     </div>
   );
 }
