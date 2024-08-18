@@ -1,13 +1,15 @@
 import React from 'react';
 import TopBar from '../components/TopBar';
 import MainSection from '../components/MainSection';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '@/components/Navbar/Nav';
+// import Sidebar from '../components/Sidebar';
 
 const MainLayout: React.FC = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <Sidebar active="home" />
+      {/* <Sidebar active="home" /> */}
+      <Sidebar/>
 
       {/* Main Content */}
       <div className="ml-64 flex-1">
