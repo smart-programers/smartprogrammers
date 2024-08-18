@@ -12,7 +12,7 @@ export default function Sidebar() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <div className="">
+  
     <div
       className={cn(
         "fixed top-0 left-0 h-full transition-width duration-300",
@@ -57,8 +57,8 @@ export default function Sidebar() {
         </div>
       </div>
     </div>
-  {children}
-    </div>
+  
+
   );
 }
 
