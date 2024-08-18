@@ -9,14 +9,14 @@ const MainLayout: React.FC = () => {
     <div className="flex">
       {/* Sidebar */}
       {/* <Sidebar active="home" /> */}
-      <Sidebar>
+      <Sidebar/>
 
       {/* Main Content */}
       <div className="ml-24 flex-1">
         <TopBar />
         <MainSection />
       </div>
-      </Sidebar>
+    
     </div>
   );
 };
