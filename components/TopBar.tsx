@@ -1,9 +1,14 @@
 "use client";
 
 import { LucideMoon, LucideSunMoon } from 'lucide-react';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaBell, FaRegUser } from "react-icons/fa6";
-
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
 const TopBar: React.FC = () => {
   const [theme, setTheme] = useState<string>("light");
 
@@ -40,24 +45,31 @@ const TopBar: React.FC = () => {
         </button>
 
         {/* User Profile */}
-        <div className="relative group">
+        <HoverCard>
+       
+        {/* <div className="relative group"> */}
+        <HoverCardTrigger>
           <button className="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
             <FaRegUser />
           </button>
+          </HoverCardTrigger>
 
           {/* Dropdown Menu for User Profile */}
-          <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            <a href="#" className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <HoverCardContent>
+          {/* <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-200"> */}
+            <Link href="#" className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
               Profile
-            </a>
-            <a href="#" className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+            </Link>
+            <Link href="#" className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
               Settings
-            </a>
-            <a href="#" className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+            </Link>
+            <Link href="#" className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
               Logout
-            </a>
-          </div>
-        </div>
+            </Link>
+          {/* </div> */}
+          </HoverCardContent>
+        {/* </div> */}
+        </HoverCard>
       </div>
     </header>
   );
