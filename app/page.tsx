@@ -1,9 +1,21 @@
-import Image from "next/image";
+import React from 'react';
+import TopBar from '../components/TopBar';
+import MainSection from '../components/MainSection';
+import Sidebar from '../components/Sidebar';
 
-export default function Home() {
+const MainLayout: React.FC = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-   <h4 className="text-center text-[5vw] animate-pulse">Smart Programmers</h4>
-    </main>
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar active="home" />
+
+      {/* Main Content */}
+      <div className="ml-64 flex-1">
+        <TopBar />
+        <MainSection />
+      </div>
+    </div>
   );
-}
+};
+
+export default MainLayout;
