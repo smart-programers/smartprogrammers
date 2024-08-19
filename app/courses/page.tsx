@@ -32,10 +32,10 @@ const MainLayout: React.FC = () => {
         />
       </div>
     </div>
-    <div className='my-3'>MERN MongoDB  Express JS, ReactJS, NodeJS</div>
-    <div className='flex justify-between'>
+    <div className='my-3 font-bold'>MERN MongoDB  Express JS, ReactJS, NodeJS</div>
+    <div className='flex justify-between mb-4'>
         <span>Tzs 70,000</span>
-        <span>Tzs 70,000</span>
+        <span className='line-through text-gray-600'>Tzs 70,000</span>
     </div>
 
     <div className='flex justify-between'>
