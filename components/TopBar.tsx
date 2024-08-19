@@ -2,7 +2,7 @@
 
 import { LucideMoon, LucideSunMoon } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaBell, FaRegUser } from "react-icons/fa6";
 import {
   HoverCard,
@@ -12,9 +12,25 @@ import {
 const TopBar: React.FC = () => {
   const [theme, setTheme] = useState<string>("light");
 
+  // Retrieve the theme from localStorage on initial render
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.add(savedTheme);
+    }
+  }, []);
+
   const handleThemeToggle = () => {
-    setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
-    document.documentElement.classList.toggle('dark');
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+
+    // Removing the previous theme class and add the new one
+    document.documentElement.classList.remove(theme);
+    document.documentElement.classList.add(newTheme);
+
+    // Saving the selected theme to localStorage
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
