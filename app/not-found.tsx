@@ -9,7 +9,7 @@ export default function NotFound() {
         404 - Page Not Found 🛑
       </h1>
       <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-        Oops! The page you're looking for doesn't exist. 😕
+        Oops! The page you&apos;re for doesn&apos;t exist. 😕
       </p>
       <div className="flex justify-center gap-4">
         <Button asChild className="px-6 py-3 text-lg flex items-center gap-2">
