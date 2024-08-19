@@ -1,6 +1,7 @@
 import React from 'react';
 import Services from './Services';
 import Courses from './Courses';
+import { LearnMoreDialog } from './LearnMoreDialog';
 
 interface CourseCardProps {
   title: string;
@@ -29,9 +30,10 @@ const MainSection: React.FC = () => {
         <p className="mt-4 text-gray-700 dark:text-gray-300">
           We are dedicated to empowering Tanzanian developers through comprehensive courses, collaborative projects, and a vibrant community.
         </p>
-        <button className="mt-4 px-4 py-2 bg-white text-yellow-500 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:text-yellow-400 dark:hover:bg-gray-700 transition-colors">
+        <LearnMoreDialog />
+        {/* <button className="mt-4 px-4 py-2 bg-white text-yellow-500 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:text-yellow-400 dark:hover:bg-gray-700 transition-colors">
           Learn More
-        </button>
+        </button> */}
       </div>
       {/* services */}
       <Services />
