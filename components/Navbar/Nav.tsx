@@ -5,6 +5,8 @@ import { FaHome, FaUser, FaCog, FaComment, FaBook } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { FaLightbulb } from "react-icons/fa6";
+import { TbHelpSquareRoundedFilled } from "react-icons/tb"
 
 export default function Sidebar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -31,26 +33,27 @@ export default function Sidebar() {
             isActive={isActive("/")}
             href="/"
           />
+          
+          <SidebarItem
+            icon={<FaLightbulb />}
+            label="Projects"
+            isHovered={isHovered}
+            isActive={isActive("/projects")}
+            href="/projects"
+          />
+          <SidebarItem
+            icon={<TbHelpSquareRoundedFilled />}
+            label="issues"
+            isHovered={isHovered}
+            isActive={isActive("/issues")}
+            href="/issues"
+          />
           <SidebarItem
             icon={<FaBook />}
             label="Courses"
             isHovered={isHovered}
             isActive={isActive("/courses")}
             href="/courses"
-          />
-          <SidebarItem
-            icon={<FaComment />}
-            label="Chat"
-            isHovered={isHovered}
-            isActive={isActive("/chats")}
-            href="/profile"
-          />
-          <SidebarItem
-            icon={<FaUser />}
-            label="Profile"
-            isHovered={isHovered}
-            isActive={isActive("/profile")}
-            href="/profile"
           />
           <SidebarItem
             icon={<FaCog />}
