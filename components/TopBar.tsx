@@ -36,11 +36,7 @@ const TopBar: React.FC = () => {
   return (
     <header className="bg-gray-100 dark:bg-gray-900 p-4 flex justify-between items-center shadow-sm transition-colors duration-300">
       <div className="w-full max-w-lg">
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-200 dark:focus:ring-blue-400"
-          placeholder="Search for courses..."
-        />
+        <h1 className=''><b><span className='text-yellow-500'>Smart</span></b>Programmers</h1>
       </div>
       <div className="ml-4 flex items-center space-x-4">
         {/* Theme Toggle */}
