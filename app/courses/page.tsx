@@ -21,7 +21,8 @@ const MainLayout: React.FC = () => {
   </div>
 
   <div className="col-span-1 md:col-span-2">
-    <h1 className='py-4 text-lg'>Recommended Course</h1>
+    <div className='dark:bg-gray-800 shadow-lg mt-4 pb-4 px-4 rounded-lg'>
+    <h1 className='text-lg py-4 font-bold'>Recommended Course</h1>
     <div className="grid w-full h-60 md:h-70 bg-blue-400">
       <div className="relative w-full h-full">
         <Image
@@ -41,6 +42,9 @@ const MainLayout: React.FC = () => {
         <span>Read More </span>
         <span>456 Students</span>
     </div>
+
+    </div>
+
 
   </div>
 </div>
