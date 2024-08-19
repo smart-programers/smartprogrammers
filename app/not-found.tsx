@@ -14,7 +14,8 @@ export default function NotFound() {
       <div className="flex justify-center gap-4">
         <Button asChild className="px-6 py-3 text-lg flex items-center gap-2">
           <Link href="/">
-            <AiOutlineHome /> 🏠 Go Back Home
+            {/* <AiOutlineHome /> */}
+             🏠 Go Back Home
           </Link>
         </Button>
         <Button
@@ -23,7 +24,8 @@ export default function NotFound() {
           variant="outline"
         >
           <Link href="/contact">
-            <AiOutlineMail /> 📧 Contact Us
+            {/* <AiOutlineMail />  */}
+            📧 Contact Us
           </Link>
         </Button>
       </div>
