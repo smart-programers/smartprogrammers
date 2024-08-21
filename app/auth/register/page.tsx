@@ -54,7 +54,7 @@ export default function RegisterPage() {
       <div className="flex flex-col md:flex-row-reverse h-full w-full max-w-5xl rounded-lg overflow-hidden shadow-lg bg-white dark:bg-gray-800">
         
         {/* Left Section */}
-        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center"
+        <div className="w-full md:w-1/2 p-12 flex flex-col justify-center"
         style={{
             flex:2
         }}>
