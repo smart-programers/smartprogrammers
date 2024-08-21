@@ -39,6 +39,8 @@ model Course{
   name String
   src String
   userId String
+  price  String
+  discount String?
   students Student[]
   episodes Episode[]
   user User @relation(fields:[userId],references:[id])
