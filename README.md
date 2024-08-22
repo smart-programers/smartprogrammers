@@ -78,6 +78,38 @@ git restore --staged .env
 
  For Both Professionals and Beginners but if you are new into Git please don't use it if you feel uncomfortable
 
+ Add Changes
+
+ ```bash
+
+ git add .
+
+ ```
+
+ Commit
+
+ ```bash
+
+ git commit -m "Message"
+
+ ```
+
+ Pull
+
+ ```bash
+
+ git pull origin main
+
+ ```
+
+ Push
+
+ ```bash
+
+ git push
+
+ ```
+
  ```bash
  git checkout main  # or the branch you want to merge into
  ```
