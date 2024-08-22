@@ -90,3 +90,8 @@ Now, merge the branch with the changes you want to incorporate. Replace feature-
 ```bash
 git merge feature-branch
 ```
+
+## After Merge Remember to Switch to Your Branch Again
+```bash
+git checkout main
+```
