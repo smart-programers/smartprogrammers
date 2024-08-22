@@ -2,6 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import Ekilirelay from "../../../lib/ekiliRelay";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
+const formSchema = z.object({
+  email: z.string().email({
+    message: "Invalid email address.",
+  }),
+  password:z.string().min(6,{
+    message:"Password must have at least 6 characters"
+  })
+})
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -27,10 +41,18 @@ export default function LoginPage() {
     setText(descriptions[index])
   },[])
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin = () => {
+   alert("Welcome Smartprogrammers")
     
   };
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password:""
+    },
+  })
 
   return (
     <div className="min-h-screen p-8 flex items-center justify-center bg-blue-50 dark:bg-gray-900">
@@ -43,31 +65,46 @@ export default function LoginPage() {
         }}>
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Karibu, Welcome Back</h2>
           <p className="text-gray-600 dark:text-gray-400 mt-2">Hey, welcome back to your special place</p>
-
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <Form {...form}>
+          <form className="mt-8 space-y-6" onSubmit={form.handleSubmit(handleLogin)}>
+          <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+              <FormControl>
               <input
                 type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...field}
                 className="w-full p-2 mt-1 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700"
                 placeholder="stanley@gmail.com"
               />
-            </div>
-
+               </FormControl>
+              
+            </div> <FormMessage /> </FormItem>
+          )}
+        />
+           <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
-              <input
+              <FormControl>
+              <Input
                 type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...field}
                 className="w-full p-2 mt-1 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700"
                 placeholder="********"
               />
-            </div>
+              </FormControl>
+              
+              </div> <FormMessage /> </FormItem>
+          )}
+        />
 
             <div className="flex items-center justify-between">
               <label className="flex items-center text-gray-600 dark:text-gray-400">
@@ -88,6 +125,7 @@ export default function LoginPage() {
               Don’t have an account? <a href="register" className="text-blue-600 hover:text-yellow-500 dark:text-indigo-400 hover:underline">Sign Up</a>
             </p>
           </form>
+          </Form>
         </div>
 
         {/* Right Section with Background Image */}

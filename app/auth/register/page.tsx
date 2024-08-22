@@ -2,6 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import Ekilirelay from "../../../lib/ekiliRelay";
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+
+
+const formSchema = z.object({
+  email: z.string().email({
+    message: "Invalid email address.",
+  }),
+  password:z.string().min(6,{
+    message:"Password must have at least 6 characters"
+  })
+})
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -28,8 +42,18 @@ export default function RegisterPage() {
     setText(descriptions[index])
   },[])
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+ 
+ 
+   const form = useForm<z.infer<typeof formSchema>>({
+     resolver: zodResolver(formSchema),
+     defaultValues: {
+       email: "",
+       password:""
+     },
+   })
+   
+  const handleLogin = () => {
+   
     ekilirelay.sendEmail(
         email, 
         'Welcome to Smart programmer', 
@@ -60,31 +84,46 @@ export default function RegisterPage() {
         }}>
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Karibu, Welcome Back</h2>
           <p className="text-gray-600 dark:text-gray-400 mt-2">Hey, welcome back to your special place</p>
-
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <Form {...form}>
+          <form className="mt-8 space-y-6" onSubmit={form.handleSubmit(handleLogin)}>
+          <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+              <FormControl>
               <input
                 type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...field}
                 className="w-full p-2 mt-1 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700"
                 placeholder="stanley@gmail.com"
               />
-            </div>
-
+               </FormControl>
+              
+              </div> <FormMessage /> </FormItem>
+            )}
+          />
+          <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+              <FormControl>
               <input
                 type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...field}
                 className="w-full p-2 mt-1 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700"
                 placeholder="********"
               />
-            </div>
+                 </FormControl>
+              
+              </div> <FormMessage /> </FormItem>
+            )}
+          />
 
             <div className="flex items-center justify-between">
               <label className="flex items-center text-gray-600 dark:text-gray-400">
@@ -98,13 +137,14 @@ export default function RegisterPage() {
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-yellow-500 transition"
             >
-              Sign UP
+              Sign Up
             </button>
 
             <p className="text-center text-gray-600 dark:text-gray-400 mt-4">
               Already have an account? <a href="login" className="text-blue-600 hover:text-yellow-500 dark:text-indigo-400 hover:underline">Sign In</a>
             </p>
           </form>
+          </Form>
         </div>
 
         {/* Right Section with Background Image */}
