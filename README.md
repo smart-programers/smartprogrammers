@@ -73,3 +73,20 @@ git restore --staged .env
  git push
 
  ```
+
+ ## Advanced Merge
+
+ For Both Professionals and Beginners but if you are new into Git please don't use it if you feel uncomfortable
+
+ ```bash
+ git checkout main  # or the branch you want to merge into
+ ```
+
+Pull Changes From Origin Branch and Solve COnflicts if they exist
+ ```bash
+ git pull origin main
+```
+Now, merge the branch with the changes you want to incorporate. Replace feature-branch with the name of the branch you're merging from.
+```bash
+git merge feature-branch
+```
