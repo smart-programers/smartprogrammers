@@ -28,7 +28,8 @@ model User {
   courses Course[]
   episodes Episode[]
   students Student[]
-  issues Issue[]
+  comments Comment[]
+  Posts Post[]
   role  Role @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -73,15 +74,29 @@ model Student {
   updatedAt DateTime @updatedAt
 }
 
-model Issue{
+model Post{
     id                String  @id @default(cuid())
   name String
   src String?
   description String
   userId String
   code  String?
+  comments Comment[]
   user User @relation(fields:[userId],references:[id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
 }
+
+model Comment {
+    id                String  @id @default(cuid())
+   description String
+   src String?
+  userId String
+  postId String
+  post Post @relation(fields: [postId],references: [id])
+   user User @relation(fields:[userId],references:[id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
