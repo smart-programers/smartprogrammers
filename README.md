@@ -123,6 +123,11 @@ Now, merge the branch with the changes you want to incorporate. Replace feature-
 git merge feature-branch
 ```
 
+Now Push Your Local Changes on Main to remote Main
+```bash
+git push
+```
+
 ## After Merge Remember to Switch to Your Branch Again
 ```bash
 git checkout main
