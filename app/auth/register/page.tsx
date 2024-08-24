@@ -6,7 +6,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-
+import axios from 'axios'
+import { useRouter } from 'next/navigation';
+import { useToast } from "@/components/ui/use-toast"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -14,6 +16,9 @@ const formSchema = z.object({
   }),
   password:z.string().min(6,{
     message:"Password must have at least 6 characters"
+  }),
+  name:z.string().min(2,{
+    message:"Name must be atleast two characters"
   })
 })
 
@@ -22,7 +27,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [text,setText] = useState('')
   const ekilirelay = new Ekilirelay();
-
+  const router = useRouter()
   const descriptions: string[] = [
     'Embark on your tech journey with us and unlock a world of opportunities for growth and innovation.',
     'Connect with a thriving community of developers eager to share knowledge and collaborate on exciting projects.',
@@ -43,19 +48,21 @@ export default function RegisterPage() {
   },[])
 
  
- 
+  const { toast } = useToast()
    const form = useForm<z.infer<typeof formSchema>>({
      resolver: zodResolver(formSchema),
      defaultValues: {
        email: "",
+       name:'',
        password:""
      },
    })
    
-  const handleLogin = () => {
-   
+  const handleLogin = (data:z.infer<typeof formSchema>) => {
+    
+   axios.post("/api/register",{data}).then(response=>{
     ekilirelay.sendEmail(
-        email, 
+        data.email, 
         'Welcome to Smart programmer', 
         'You have successful joined smart programmer', 
         'From: Smart programmers < smart-programmers@gmail.com >'
@@ -63,6 +70,12 @@ export default function RegisterPage() {
     .then(response => {
       if (response.status === 'success') {
         console.log('Email sent successfully.');
+        toast({
+          title: "Successful",
+          description: "Registered Successfully!"
+      })
+      form.reset()
+        router.push("/login")
       } else {
         console.log('Failed to send email: ' + response.message);
         console.log(response);
@@ -71,6 +84,9 @@ export default function RegisterPage() {
     .catch(error => {
       console.log('Error:', error);
     });
+  })  .catch(error => {
+    console.log('Error:', error);
+  });
   };
 
   return (
@@ -87,6 +103,26 @@ export default function RegisterPage() {
           <Form {...form}>
           <form className="mt-8 space-y-6" onSubmit={form.handleSubmit(handleLogin)}>
           <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+              <FormControl>
+              <input
+                type="text"
+                {...field}
+                className="w-full p-2 mt-1 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700"
+                placeholder="John Doe"
+              />
+               </FormControl>
+              
+              </div> <FormMessage /> </FormItem>
+            )}
+          />
+
+<FormField
           control={form.control}
           name="email"
           render={({ field }) => (
