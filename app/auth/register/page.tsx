@@ -72,7 +72,7 @@ export default function RegisterPage() {
             description: "Registered Successfully!",
             
           });
-          router.push("/login");  
+          router.push("/auth/login");  
        } else {
          console.error('Registration error:', response.errors);
          toast({
