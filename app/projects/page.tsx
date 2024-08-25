@@ -3,6 +3,7 @@
 import { FaPlus, FaFolder } from "react-icons/fa";
 import { useState } from "react";
 import Link from "next/link";
+import AddProject from "./AddProject";
 
 export default function HomePage() {
   const [projects, setProjects] = useState([
@@ -40,9 +41,10 @@ export default function HomePage() {
             ))}
           </ul>
         </div>
-        <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-gray-900 py-2 px-4 rounded mt-6 flex items-center">
+        {/* <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-gray-900 py-2 px-4 rounded mt-6 flex items-center">
           <FaPlus className="mr-2" /> Add Project
-        </button>
+        </button> */}
+        <AddProject/>
       </aside>
 
       {/* Main Content */}

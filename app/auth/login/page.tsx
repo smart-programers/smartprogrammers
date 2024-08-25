@@ -24,7 +24,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [text,setText] = useState('')
-  const ekilirelay = new Ekilirelay();
+  const ekilirelay = new Ekilirelay("relay-de9132b0e95c399643236be9c9");
   const { toast } = useToast();
   const router = useRouter()
   const descriptions: string[] = [
