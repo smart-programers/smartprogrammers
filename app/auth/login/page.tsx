@@ -7,6 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Login } from '@/app/actions/login';
+import { useRouter } from 'next/navigation';
+import { useToast } from "@/components/ui/use-toast"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -19,10 +22,11 @@ const formSchema = z.object({
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [text,setText] = useState('')
   const ekilirelay = new Ekilirelay();
-
+  const { toast } = useToast();
+  const router = useRouter()
   const descriptions: string[] = [
     'Join a global community of developers who are changing the world with their code. Together, we innovate and push the boundaries of technology.',
     'Discover the latest advancements in technology and become a part of groundbreaking projects that shape the future.',
@@ -41,8 +45,34 @@ export default function LoginPage() {
     setText(descriptions[index])
   },[])
 
-  const handleLogin = () => {
-   alert("Welcome Smartprogrammers")
+  const handleLogin = async(data:z.infer<typeof formSchema>) => {
+    try {
+      
+      const response = await Login(data.password, data.email,rememberMe);
+
+      if (response.success) {
+         toast({
+           title: "Successful",
+           description: "Logged In Successfully!",
+           
+         });
+         router.push("/");  
+      } else {
+        console.error('Login error:', response.errors);
+        toast({
+          title: "Login Error",
+          description: `Error: Unable to Login`,
+        
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Unexpected Error",
+        description: "An unexpected error occurred.",
+       
+      });
+    }
     
   };
 
@@ -108,7 +138,10 @@ export default function LoginPage() {
 
             <div className="flex items-center justify-between">
               <label className="flex items-center text-gray-600 dark:text-gray-400">
-                <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500" />
+                <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500" 
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+/>
                 <span className="ml-2">Remember me</span>
               </label>
               <a href="#" className="text-blue-600 hover:text-yellow-500 dark:text-indigo-400 hover:underline">Forgot Password?</a>
