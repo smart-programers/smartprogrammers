@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import { useToast } from "@/components/ui/use-toast"
+import { Register } from '@/app/actions/register';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -58,36 +59,37 @@ export default function RegisterPage() {
      },
    })
    
-  const handleLogin = (data:z.infer<typeof formSchema>) => {
-    
-   axios.post("/api/register",{data}).then(response=>{
-    ekilirelay.sendEmail(
-        data.email, 
-        'Welcome to Smart programmer', 
-        'You have successful joined smart programmer', 
-        'From: Smart programmers < smart-programmers@gmail.com >'
-    )
-    .then(response => {
-      if (response.status === 'success') {
-        console.log('Email sent successfully.');
-        toast({
-          title: "Successful",
-          description: "Registered Successfully!"
-      })
-      form.reset()
-        router.push("/login")
-      } else {
-        console.log('Failed to send email: ' + response.message);
-        console.log(response);
-      }
-    })
-    .catch(error => {
-      console.log('Error:', error);
-    });
-  })  .catch(error => {
-    console.log('Error:', error);
-  });
-  };
+  
+
+   const handleRegister = async (data: z.infer<typeof formSchema>) => {
+     try {
+      
+       const response = await Register(data.name, data.password, data.email);
+ 
+       if (response.success) {
+          toast({
+            title: "Successful",
+            description: "Registered Successfully!",
+            
+          });
+          router.push("/login");  
+       } else {
+         console.error('Registration error:', response.errors);
+         toast({
+           title: "Registration Error",
+           description: `Error: Unable to Perform Registration`,
+         
+         });
+       }
+     } catch (error) {
+       console.error('Error:', error);
+       toast({
+         title: "Unexpected Error",
+         description: "An unexpected error occurred.",
+        
+       });
+     }
+   };
 
   return (
     <div className="min-h-screen p-8 flex items-center justify-center bg-blue-50 dark:bg-gray-900">
@@ -101,7 +103,7 @@ export default function RegisterPage() {
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Karibu, Welcome Back</h2>
           <p className="text-gray-600 dark:text-gray-400 mt-2">Hey, welcome back to your special place</p>
           <Form {...form}>
-          <form className="mt-8 space-y-6" onSubmit={form.handleSubmit(handleLogin)}>
+          <form className="mt-8 space-y-6" onSubmit={form.handleSubmit(handleRegister)}>
           <FormField
           control={form.control}
           name="name"

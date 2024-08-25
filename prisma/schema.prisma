@@ -21,8 +21,8 @@ enum Role{
 
 model User {
    id                String  @id @default(cuid())
-  name String
-  email String
+  name String  @unique
+  email String @unique
   password String
   src String?
   courses Course[]
