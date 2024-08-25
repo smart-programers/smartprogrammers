@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Ekilirelay from "../../../lib/ekiliRelay";
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,6 +9,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import { useToast } from "@/components/ui/use-toast"
 import { Register } from '@/app/actions/register';
+import EkiliRelay from '../../../lib/ekiliRelay';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -27,8 +27,13 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [text,setText] = useState('')
-  const ekilirelay = new Ekilirelay();
+  
+  // const ekiliRelay_apikey = process.env.EKILIRELAY_APIKEY
+  // console.log(ekiliRelay_apikey)
+
+  const ekilirelay = new EkiliRelay("relay-de9132b0e95c399643236be9c9");
   const router = useRouter()
+
   const descriptions: string[] = [
     'Embark on your tech journey with us and unlock a world of opportunities for growth and innovation.',
     'Connect with a thriving community of developers eager to share knowledge and collaborate on exciting projects.',
@@ -59,9 +64,29 @@ export default function RegisterPage() {
      },
    })
    
+   const sendEmail = () =>{
+      ekilirelay.sendEmail(
+        email, 
+        'Welcome to SmartProgrammers', 
+        'Congratulations you have successfully joined', 
+        'From: Smart Programmers <support@ekilie.com>'
+      )
+      .then(response => {
+        if (response.status === 'success') {
+          console.log('Email sent successfully.');
+        } else {
+          console.log('Failed to send email: ' + response.message);
+          console.log(response);
+        }
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      });
+   }
   
 
    const handleRegister = async (data: z.infer<typeof formSchema>) => {
+     sendEmail()
      try {
       
        const response = await Register(data.name, data.password, data.email);
@@ -100,8 +125,8 @@ export default function RegisterPage() {
         style={{
             flex:2
         }}>
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Karibu, Welcome Back</h2>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">Hey, welcome back to your special place</p>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Join us</h2>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">Explore the digital traversy</p>
           <Form {...form}>
           <form className="mt-8 space-y-6" onSubmit={form.handleSubmit(handleRegister)}>
           <FormField

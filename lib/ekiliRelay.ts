@@ -1,87 +1,69 @@
-/*!
-   SDK/TS/EkiliRelay.ts
- * EkiliRelay SDK v1.0.0
- * (c) 2024 EkiliRelay
- * Released under the MIT License.
+/**
+ * The EkiliRelay class is designed to handle email sending functionality
+ * using a provided API key. It connects to a remote API endpoint and sends
+ * email requests based on the given parameters.
  * 
- * Includes:
- * - EkiliRelay class for email sending functionality.
+ * This class should be initialized with an API key which is used for
+ * authenticating requests to the email service.
  */
-
-/*!
- * MIT License
- * 
- * Copyright (c) 2024 EkiliRelay
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
-interface SendEmailResponse {
-    status: string;
-    message: string;
-    [key: string]: any; // For any additional response fields
-}
-
 class EkiliRelay {
-    private apiUrl: string;
+    private apikey: string;      // The API key required for authenticating requests
+    private apiUrl: string;     // The URL of the API endpoint for sending emails
 
-    constructor() {
+    /**
+     * Constructs an instance of the EkiliRelay class.
+     * @param apikey - The API key required for authenticating requests
+     */
+    constructor(apikey: string) {
+        this.apikey = apikey;
         this.apiUrl = "https://relay.ekilie.com/api/index.php";
         console.log("EkiliRelay connected");
     }
 
     /**
-     * Sends an email using EkiliRelay.
-     * @param {string} to Email address of the recipient.
-     * @param {string} subject Subject of the email.
-     * @param {string} message Body content of the email.
-     * @param {string} [headers=''] Optional headers for the email.
-     * @returns {Promise<SendEmailResponse>} A promise resolving to the response object.
+     * Sends an email using the provided details.
+     * 
+     * @param to - The recipient's email address.
+     * @param subject - The subject of the email.
+     * @param message - The body of the email.
+     * @param headers - Optional additional headers for the email.
+     * @returns A promise that resolves to the result of the email sending operation.
      */
-    async sendEmail(to: string, subject: string, message: string, headers: string = ''): Promise<SendEmailResponse> {
-        // Construct the data to send
+    async sendEmail(
+        to: string, 
+        subject: string, 
+        message: string, 
+        headers: string = ''
+    ): Promise<{ status: string; message: string }> {
+        // Construct the payload to be sent to the API
         const data = {
-            to: to,
-            subject: subject,
-            message: message,
-            headers: headers
+            to: to,               // Recipient's email address
+            subject: subject,     // Subject line of the email
+            message: message,     // Body of the email
+            headers: headers,     // Optional additional headers
+            apikey: this.apikey   // API key for authentication
         };
 
         try {
-            // Make the API request
+            // Send the HTTP POST request to the API endpoint with the email data
             const response = await fetch(this.apiUrl, {
-                method: 'POST',
+                method: 'POST',                  // HTTP method to use
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json' // Specify that we are sending JSON data
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data)   // Convert the data object to a JSON string
             });
 
-            // Parse and return the response JSON
-            const result: SendEmailResponse = await response.json();
+            // Parse the JSON response from the server
+            const result = await response.json();
+            // Return the result of the email sending operation
             return result;
-        } catch (error: any) {
-            // Handle any errors
-            return { status: 'error', message: error.message };
+        } catch (error) {
+            // Return an error object if something goes wrong
+            return { status: 'error', message: (error as Error).message };
         }
     }
 }
 
+// Export the EkiliRelay class so it can be used in other modules
 export default EkiliRelay;
-// End of EkiliRelay SDK implementation
