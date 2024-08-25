@@ -46,11 +46,11 @@ export async function UserLogin(password: string, email: string,rememberMe:boole
 
     const expiresIn = rememberMe ? '30d' : '1h';
    const user={
-    name:newUser.name,
-    id:newUser.id,
-    role:newUser.role
+    name:newUser?.name,
+    id:newUser?.id,
+    role:newUser?.role
    }
-    const isMatch = await bcrypt.compare(password,newUser.password)
+    const isMatch = await bcrypt.compare(password,newUser?.password as string)
     if(isMatch){
        const token = await signJwtToken(user,expiresIn)
        CookieStore.set(Cookie,token)

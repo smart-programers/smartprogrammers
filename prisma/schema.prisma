@@ -29,7 +29,8 @@ model User {
   episodes Episode[]
   students Student[]
   comments Comment[]
-  Posts Post[]
+  projects Project[]
+  posts Post[]
   role  Role @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -82,6 +83,17 @@ model Post{
   userId String
   code  String?
   comments Comment[]
+  user User @relation(fields:[userId],references:[id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project{
+    id                String  @id @default(cuid())
+  name String
+  src String?
+  description String
+  userId String
   user User @relation(fields:[userId],references:[id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
