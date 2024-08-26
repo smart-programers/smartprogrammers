@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import { useState } from "react"
+import { createProject } from "../actions/createProject"
 
 const formSchema = z.object({
     name: z.string().min(2,{
@@ -40,12 +41,21 @@ export default function AddProject(){
 
       const handleSubmit = async(data:z.infer<typeof formSchema>) => {
  
+        const project = await createProject(data.name,data.description,data.src)
+        if(project.success === true){
         toast({
             title: "Successful",
             description: `${data.name} Created Successfully!`,
             
           });
           isOpen()
+        }else{
+          toast({
+            title: "Error",
+            description: `Failed to Create ${data.name}!`,
+            
+          });
+        }
       };
     return(
         <Dialog open={open} onOpenChange={isOpen}>

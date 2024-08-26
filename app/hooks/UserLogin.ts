@@ -16,6 +16,19 @@ const createUserSchema = z.object({
 });
 
 
+function getExpirationDateInDays(days:any) {
+  const now = new Date();
+  now.setTime(now.getTime() + days * 24 * 60 * 60 * 1000);
+  return now;
+}
+
+
+function getExpirationDateInHours(hours:any) {
+  const now = new Date();
+  now.setTime(now.getTime() + hours * 60 * 60 * 1000);
+  return now;
+}
+
 const CookieStore = cookies()
 
 export async function UserLogin(password: string, email: string,rememberMe:boolean) {
@@ -53,7 +66,9 @@ export async function UserLogin(password: string, email: string,rememberMe:boole
     const isMatch = await bcrypt.compare(password,newUser?.password as string)
     if(isMatch){
        const token = await signJwtToken(user,expiresIn)
-       CookieStore.set(Cookie,token)
+       CookieStore.set(Cookie,token,{
+        expires: rememberMe ? getExpirationDateInDays(30) : getExpirationDateInHours(1)
+       })
        console.log(token,"token")
     return { success: true, user: user };
     }
