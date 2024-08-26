@@ -26,6 +26,7 @@ function getExpirationDateInDays(days:any) {
 function getExpirationDateInHours(hours:any) {
   const now = new Date();
   now.setTime(now.getTime() + hours * 60 * 60 * 1000);
+  console.log(new Date(now).toLocaleString())
   return now;
 }
 
