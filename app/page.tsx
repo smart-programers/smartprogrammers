@@ -1,15 +1,19 @@
-"use client"
+
 
 import React from 'react';
 import TopBar from '../components/TopBar';
 import MainSection from '../components/MainSection';
 import Sidebar from '@/components/Navbar/Nav';
+import { getUser } from './actions/user';
 // import Sidebar from '../components/Sidebar';
 
 
 
-const MainLayout: React.FC = () => {
+export default async function  MainLayout(){
 
+  const user = await getUser()
+
+  console.log(user)
 
 // Example usage of the package
 
@@ -29,4 +33,4 @@ const MainLayout: React.FC = () => {
   );
 };
 
-export default MainLayout;
+
