@@ -95,7 +95,7 @@ model Post{
 
 model Project{
     id                String  @id @default(cuid())
-  name String @unique
+  name String
   src String?
   description String
   userId String
