@@ -14,7 +14,7 @@ function matchURL(url:string, matchURL:string){
 
 
 export async function middleware(req: NextRequest) {
-  // We need to create a response and hand it to the Supabase client to be able to modify the response headers.
+
   const res = NextResponse.next()
 
 
