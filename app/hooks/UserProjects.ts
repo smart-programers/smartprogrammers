@@ -59,3 +59,44 @@ export async function CreateProject(name:string,description:string,src:string){
       return {success:true, project:project}
 
 }
+
+
+export async function Projects(){
+
+  const project = await prisma?.project.findMany({
+  orderBy:{
+    createdAt:"desc"
+  }
+  })
+
+  return {success:true, project:project}
+
+}
+
+
+export async function MyProjects(){
+     
+  const user = await getUser()
+
+  if(user.success === false){
+    return {success:false,message:"Unauthorized"}
+  }
+
+  const isExisting = await prisma?.user.findFirst({
+    where:{
+        id:user?.user?.id as string
+    }
+  })
+
+  if(!isExisting){
+    return {success:false,message:"User Does Not Exist"}
+  }
+
+  const project = await prisma?.project.findMany({
+    where:{
+        userId:isExisting.id
+    }
+  })
+
+  return {success:true, project:project}
+}

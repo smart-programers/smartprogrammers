@@ -1,6 +1,7 @@
 "use server"
 import { z } from "zod";
-import { CreateProject } from "../hooks/UserProjects";
+import { CreateProject, MyProjects, Projects } from "../hooks/UserProjects";
+import { revalidatePath } from "next/cache";
 
 const formSchema = z.object({
     name: z.string().min(2,{
@@ -36,3 +37,37 @@ export async function createProject(name:string,description:string,src:string){
         return{success:false,error:"Unable to Create Project"}
       }
 }
+
+
+export async function AllProjects(){
+
+  try{
+    const projects = await Projects()
+
+    if(projects){
+      revalidatePath("/","layout")
+    }
+
+    return{success:true,projects:projects}
+  }catch{
+    return {success:false,projects:[]}
+  }
+}
+
+
+
+export async function myProjects(){
+
+  try{
+    const projects = await MyProjects()
+
+    if(projects){
+      revalidatePath("/","layout")
+    }
+
+    return{success:true,projects:projects}
+  }catch{
+    return {success:false,projects:[]}
+  }
+}
+
