@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import { useState } from "react"
 import { createProject } from "../actions/createProject"
+import { getUser } from "../actions/user"
 
 const formSchema = z.object({
     name: z.string().min(2,{
@@ -33,8 +34,18 @@ export default function AddProject(){
         },
       })
 
-      const isOpen=()=>{
+      const isOpen=async()=>{
+
+        const user = await getUser()
+        if(user.success === true){
         setOpen(!open)
+        }else{
+          toast({
+            title: "Authentication",
+            description: `You must Sign In!`,
+            
+          });
+        }
       }
 
       const {toast} = useToast()
@@ -58,12 +69,12 @@ export default function AddProject(){
         }
       };
     return(
-        <Dialog open={open} onOpenChange={isOpen}>
-            <DialogTrigger asChild>
-            <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-gray-900 py-2 px-4 rounded mt-6 flex items-center">
+      <>
+      <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-gray-900 py-2 px-4 rounded mt-6 flex items-center" onClick={isOpen}>
           <FaPlus className="mr-2" /> Add Project
         </button> 
-            </DialogTrigger>
+        <Dialog open={open} onOpenChange={isOpen}>
+          
             <DialogContent>
             <DialogHeader>
                 <DialogTitle>Add New Project</DialogTitle>
@@ -141,5 +152,6 @@ export default function AddProject(){
           </Form>
             </DialogContent>
         </Dialog>
+        </>
     )
 }
