@@ -19,6 +19,11 @@ enum Role{
   TUTOR
 }
 
+enum Visibility {
+  public
+  private
+}
+
 model User {
    id                String  @id @default(cuid())
   name String  @unique
@@ -94,6 +99,7 @@ model Project{
   src String?
   description String
   userId String
+  visibility Visibility @default(public)
   user User @relation(fields:[userId],references:[id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
