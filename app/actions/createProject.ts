@@ -1,6 +1,6 @@
 "use server"
 import { z } from "zod";
-import { CreateProject, MyProjects, Projects } from "../hooks/UserProjects";
+import { CreateProject, DeleteProject, MyProjects, Projects } from "../hooks/UserProjects";
 import { revalidatePath } from "next/cache";
 
 const formSchema = z.object({
@@ -71,3 +71,19 @@ export async function myProjects(){
   }
 }
 
+
+
+export async function deleteProject(id:string){
+
+  try{
+    const projects = await DeleteProject(id)
+
+    if(projects){
+      revalidatePath("/","layout")
+    }
+
+    return{success:true,projects:projects}
+  }catch{
+    return {success:false,projects:[]}
+  }
+}
