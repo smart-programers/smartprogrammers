@@ -72,13 +72,13 @@ export async function CreateProject(name:string,description:string,src:string){
 
 export async function Projects(){
 
-  const project = await prisma?.project.findMany({
+  const projects = await prisma?.project.findMany({
   orderBy:{
     createdAt:"desc"
   }
   })
 
-  return {success:true, project:project}
+  return {success:true, projects:projects}
 
 }
 

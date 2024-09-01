@@ -32,7 +32,7 @@ export async function createProject(name:string,description:string,src:string){
       const project = await CreateProject(name,description,src)
 
       if(project){
-        return {success:true,project:project}
+        return {success:true,project:project?.project}
       }else{
         return{success:false,error:"Unable to Create Project"}
       }
@@ -48,7 +48,7 @@ export async function AllProjects(){
       revalidatePath("/","layout")
     }
 
-    return{success:true,projects:projects}
+    return{success:true,projects:projects?.projects}
   }catch{
     return {success:false,projects:[]}
   }
@@ -65,7 +65,7 @@ export async function myProjects(){
       revalidatePath("/","layout")
     }
 
-    return{success:true,projects:projects}
+    return{success:true,projects:projects?.project}
   }catch{
     return {success:false,projects:[]}
   }
@@ -82,7 +82,7 @@ export async function deleteProject(id:string){
       revalidatePath("/","layout")
     }
 
-    return{success:true,projects:projects}
+    return{success:true,projects:projects?.project}
   }catch{
     return {success:false,projects:[]}
   }
