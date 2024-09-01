@@ -11,6 +11,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { useState } from "react"
 import { createProject } from "../actions/createProject"
 import { getUser } from "../actions/user"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     name: z.string().min(2,{
@@ -25,6 +26,7 @@ const formSchema = z.object({
   })
 export default function AddProject(){
     const [open,setOpen] = useState(false)
+    const router = useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -60,6 +62,7 @@ export default function AddProject(){
             
           });
           isOpen()
+          router.refresh()
         }else{
           toast({
             title: "Error",
