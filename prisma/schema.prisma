@@ -19,6 +19,11 @@ enum Role{
   TUTOR
 }
 
+enum isLiked {
+  true
+  false
+}
+
 enum Visibility {
   public
   private
@@ -34,8 +39,13 @@ model User {
   episodes Episode[]
   students Student[]
   comments Comment[]
+  messages Message[]
+  conversations Conversation[]
+  groups Group[]
   projects Project[]
   posts Post[]
+  likes Like[]
+  follows Follow[]
   role  Role @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -52,6 +62,26 @@ model Course{
   students Student[]
   episodes Episode[]
   user User @relation(fields:[userId],references:[id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id                String  @id @default(cuid())
+    userId String
+  postId String
+  post Post @relation(fields: [postId],references: [id])
+   user User @relation(fields:[userId],references:[id])
+   isLiked isLiked @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Follow{
+  id                String  @id @default(cuid())
+  userId String
+  followerId String
+   user User @relation(fields:[userId],references:[id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -88,6 +118,7 @@ model Post{
   userId String
   code  String?
   comments Comment[]
+  likes Like[]
   user User @relation(fields:[userId],references:[id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -117,4 +148,38 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
+model Message{
+     id                String  @id @default(cuid())
+   message String
+   src String?
+  userId String
+  conversationId String?
+  conversation Conversation? @relation(fields: [conversationId],references: [id])
+   user User @relation(fields:[userId],references:[id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Group{
+  id                String  @id @default(cuid())
+  name String
+  src String?
+  userId String
+   user User @relation(fields:[userId],references:[id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Conversation{
+    id                String  @id @default(cuid())
+     userId String
+     senderId String
+     messages Message[]
+   user User @relation(fields:[userId],references:[id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 
