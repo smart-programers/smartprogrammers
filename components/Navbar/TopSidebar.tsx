@@ -13,7 +13,7 @@ import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 
 export default function TopSidebar() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(true);
   const [open,setIsopen] = useState(false)
   const pathname = usePathname();
 
