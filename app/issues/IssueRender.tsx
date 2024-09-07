@@ -9,42 +9,68 @@ import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 
 const detectLanguage = (code:string) => {
-  if (code.includes('<') && code.includes('>')) {
-    return 'html';
-  } else if (code.includes('function') || code.includes('const') || code.includes('let')) {
-    return 'javascript';
-  } else if (code.includes('{') && code.includes('}')) {
-    return 'css';
-  } else if (code.includes('class') && code.includes('public static void main')) {
-    return 'java';
-  } else if (code.includes('def ') && code.includes(':')) {
-    return 'python';
-  } else if (code.includes('fn ') && code.includes('->')) {
-    return 'elixir';
-  } else if (code.includes('#include') || code.includes('int main(')) {
-    return 'cpp';  // C++
-  } else if (code.includes('Console.WriteLine') || code.includes('public class')) {
-    return 'csharp'; // C#
-  } else if (code.includes('<?php') || code.includes('echo ')) {
-    return 'php';
-  } else if (code.includes('#include') && code.includes('main(')) {
-    return 'c';  // C language
-  } else if (code.includes('using System;') || code.includes('namespace')) {
-    return 'csharp'; // C#
-  } else if (code.includes('SELECT') && code.includes('FROM')) {
-    return 'sql';  // SQL queries
-  } else if (code.includes('package main') && code.includes('fmt.Println')) {
-    return 'go';  // Golang
-  } else if (code.includes('fn main()') || code.includes('println!')) {
-    return 'rust';  // Rust
-  } else if (code.includes('BEGIN') && code.includes('END;')) {
-    return 'plsql';  // PL/SQL
-  } else if (code.includes('function') || code.includes('echo') || code.includes('var ')) {
-    return 'php'; // PHP
-  } else if (code.includes('(setq') || code.includes('(defun')) {
-    return 'lisp'; // Lisp
+  switch (true) {
+
+    case /<[^>]+>/.test(code):
+      return 'html';
+
+    case /(function|const|let|=>|import|export)/.test(code):
+      return 'javascript';
+
+
+    case /{[^}]*}/.test(code) && !/(int|public|class|def)/.test(code):
+      return 'css';
+
+ 
+    case /class\s+[A-Za-z]+\s+{/.test(code) && /public\s+static\s+void\s+main/.test(code):
+      return 'java';
+
+
+    case /def\s+[A-Za-z_]+\s*\(.*\):/.test(code) || /print\s*\(.+\)/.test(code):
+      return 'python';
+
+    case /fn\s+[A-Za-z_]+\s*->/.test(code):
+      return 'elixir';
+
+
+    case /#include\s*<[^>]+>/i.test(code) && /int\s+main\s*\(/.test(code):
+      return 'cpp';
+
+
+    case /Console\.WriteLine/.test(code) || /using\s+System/.test(code):
+      return 'csharp';
+
+
+    case /#include\s*<[^>]+>/i.test(code) && /main\s*\(/.test(code):
+      return 'c';
+
+ 
+    case /<\?php/.test(code) || /echo\s+['"]/.test(code) || /function\s+[A-Za-z_]+\s*\(/.test(code):
+      return 'php';
+
+
+    case /(SELECT|INSERT|UPDATE|DELETE|WITH|JOIN|UNION|CREATE|ALTER|DROP|WHERE|GROUP\s+BY|ORDER\s+BY|LIMIT|OFFSET|HAVING)/i.test(code):
+      return 'sql';
+
+
+    case /package\s+main/.test(code) && /fmt\.Println/.test(code):
+      return 'go';
+
+    case /fn\s+main\s*\(\)/.test(code) && /println!\s*\(/.test(code):
+      return 'rust';
+
+    case /(BEGIN|END;|DECLARE|EXCEPTION|LOOP|IF|THEN|ELSE|CURSOR|FETCH|EXIT)/i.test(code):
+      return 'plsql';
+
+  
+    case /(setq|defun)/.test(code):
+      return 'lisp';
+
+  
+    default:
+      return 'plaintext';
+  
   }
-  return 'plaintext'; 
 };
 
 const CodeBlock = ({ code, language }:{code:string,language:string}) => {
