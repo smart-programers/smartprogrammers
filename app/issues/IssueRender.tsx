@@ -45,7 +45,7 @@ const detectLanguage = (code:string) => {
       return 'c';
 
  
-    case /<\?php/.test(code) || /echo\s+['"]/.test(code) || /function\s+[A-Za-z_]+\s*\(/.test(code):
+    case /<\?php/.test(code) || /echo\s+['"]/.test(code) || /function\s+[A-Za-z_]+\s*\(/.test(code) || /<\?=/.test(code):
       return 'php';
 
 
