@@ -13,6 +13,8 @@ import { useToast } from "@/components/ui/use-toast"
 import { getUser } from "../actions/user"
 import { useRouter } from "next/navigation"
 import { createIssue } from "../actions/issues"
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -124,7 +126,7 @@ export default function AddIssue() {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Textarea
+                          <ReactQuill
                             id="description"
                             className="col-span-3"
                             {...field}
