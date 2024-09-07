@@ -7,7 +7,7 @@ import Sidebar from '@/components/Navbar/Nav';
 import { getUser } from './actions/user';
 // import Sidebar from '../components/Sidebar';
 
-
+export const revalidate =0 ;
 
 export default async function  MainLayout(){
 

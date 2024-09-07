@@ -3,6 +3,8 @@ import { AllIssues } from '../actions/issues'
 import AddIssue from './AddIssue'
 import IssueRender from './IssueRender'
 
+export const revalidate =0 ;
+
 export default async function IssuePage() {
 
   const issues = await AllIssues()

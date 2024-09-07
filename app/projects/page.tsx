@@ -7,6 +7,8 @@ import AddProject from "./AddProject";
 import { AllProjects } from "../actions/createProject";
 import FormProject from "./FormProject";
 
+export const revalidate =0 ;
+
 export default async function HomePage() {
   
 
