@@ -7,23 +7,30 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaLightbulb } from "react-icons/fa6";
 import { TbHelpSquareRoundedFilled } from "react-icons/tb"
+import { RiMenu2Line } from "react-icons/ri";
+import { IoIosClose } from "react-icons/io";
 
-export default function Sidebar() {
+export default function TopSidebar() {
   const [isHovered, setIsHovered] = useState(false);
+  const [open,setIsopen] = useState(false)
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
 
   return (
+    <>
+    <button className="block md:hidden lg:hidden" onClick={()=>setIsopen(!open)}> <RiMenu2Line size={30}/></button>
+    {open && (
     <div
       className={cn(
-        "fixed top-0 left-0 h-full transition-width duration-300 hidden md:block lg:block",
+        "fixed top-0 left-0 h-full transition-width duration-300 block md:hidden lg:hidden",
         isHovered ? "w-64" : "w-16",
         "bg-blue-600 text-white shadow-lg"
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+       <button className="block md:hidden lg:hidden" onClick={()=>setIsopen(!open)}> <IoIosClose size={30}/></button>
       <div className={`flex flex-col py-4 ${isHovered ? "p-4" : "items-center"}`}>
         <div className="space-y-4 mt-6">
           <SidebarItem
@@ -64,7 +71,8 @@ export default function Sidebar() {
           />
         </div>
       </div>
-    </div>
+    </div>)}
+    </>
   );
 }
 

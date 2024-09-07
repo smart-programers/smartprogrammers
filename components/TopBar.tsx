@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/hover-card"
 import ToggleTheme from './ToggleTheme';
 import { getUser } from '@/app/actions/user';
+import TopSidebar from './Navbar/TopSidebar';
+
 export default async function TopBar(){
   
   const user = await getUser()
@@ -18,8 +20,9 @@ export default async function TopBar(){
   console.log(user)
   return (
     <header className="bg-gray-100 dark:bg-gray-900 p-4 flex justify-between items-center shadow-sm transition-colors duration-300">
+     <TopSidebar/>
       <div className="w-full max-w-lg">
-        <h1 className=''><b><span className='text-yellow-500'>Smart</span></b>Programmers</h1>
+        <Link href="/" className=''><b><span className='text-yellow-500'>Smart</span></b>Programmers</Link>
       </div>
       <div className="ml-4 flex items-center space-x-4">
         {/* Theme Toggle */}

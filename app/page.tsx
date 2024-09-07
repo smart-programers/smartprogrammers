@@ -24,7 +24,7 @@ export default async function  MainLayout(){
       <Sidebar/>
    
       {/* Main Content */}
-      <div className="ml-16 flex-1">
+      <div className="md:ml-16 lg:ml-16 flex-1">
         <TopBar />
         <MainSection />
       </div>

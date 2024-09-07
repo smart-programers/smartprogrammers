@@ -10,7 +10,7 @@ export default function ProjectsLayout({ children }: { children: React.ReactNode
       <Sidebar/>
 
       {/* Main Content */}
-      <div className="ml-16 flex-1">
+      <div className="md:ml-16 lg:ml-16 flex-1">
         <TopBar />
         {children}
       </div>
