@@ -9,6 +9,8 @@ import { FaLightbulb } from "react-icons/fa6";
 import { TbHelpSquareRoundedFilled } from "react-icons/tb"
 import { RiMenu2Line } from "react-icons/ri";
 import { IoIosClose } from "react-icons/io";
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
 
 export default function TopSidebar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -16,15 +18,23 @@ export default function TopSidebar() {
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
-
+  const toggleDrawer = () => {
+    setIsopen((prevState) => !prevState)
+}
   return (
     <>
     <button className="block md:hidden lg:hidden" onClick={()=>setIsopen(!open)}> <RiMenu2Line size={30}/></button>
     {open && (
+        <Drawer
+        open={open}
+        onClose={toggleDrawer}
+        direction='left'
+        className='bla bla bla'
+    >
     <div
       className={cn(
-        "fixed top-0 left-0 h-full transition-width duration-300 block md:hidden lg:hidden",
-        isHovered ? "w-64" : "w-16",
+        "fixed top-0 left-0 h-full transition-width duration-300 block md:hidden lg:hidden w-64",
+        
         "bg-blue-600 text-white shadow-lg"
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -71,7 +81,9 @@ export default function TopSidebar() {
           />
         </div>
       </div>
-    </div>)}
+    </div>
+    </Drawer>
+    )}
     </>
   );
 }
