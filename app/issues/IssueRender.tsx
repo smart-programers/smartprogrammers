@@ -6,7 +6,8 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'; 
-
+import { GrFormPrevious } from "react-icons/gr";
+import { GrFormNext } from "react-icons/gr";
 
 const detectLanguage = (code:string) => {
   switch (true) {
@@ -117,14 +118,14 @@ export default function IssueRender({data}:{data:any}){
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
-          Previous
+          <GrFormPrevious />
         </Button>
         <span>Page {currentPage} of {pageCount}</span>
         <Button 
           onClick={() => setCurrentPage(prev => Math.min(prev + 1, pageCount))}
           disabled={currentPage === pageCount}
         >
-          Next
+          <GrFormNext />
         </Button>
       </div>
         </>
