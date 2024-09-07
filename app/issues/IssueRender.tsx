@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'; 
 import { GrFormPrevious } from "react-icons/gr";
 import { GrFormNext } from "react-icons/gr";
+import Link from "next/link"
 
 const detectLanguage = (code:string) => {
   switch (true) {
@@ -95,6 +96,7 @@ export default function IssueRender({data}:{data:any}){
         <>
         <ScrollArea className="h-[400px] md:h-[600px] lg:h-[700px] w-full rounded-md border p-4">
         {currentIssues.map((issue:any) => (
+          <Link href={`/post/${issue.id}`} >
           <Card key={issue?.id} className="mb-4">
             <CardHeader>
               <CardTitle>{issue?.name}</CardTitle>
@@ -109,8 +111,9 @@ export default function IssueRender({data}:{data:any}){
                 <img src={issue?.src} alt={`Issue ${issue?.id}`} className="mt-2 rounded-md" />
               )}
             </CardContent>
-          </Card>
+          </Card></Link>
         ))}
+        
       </ScrollArea>
 
       <div className="flex justify-between items-center mt-4">

@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { CreateProject, DeleteProject, MyProjects, Projects } from "../hooks/UserProjects";
 import { revalidatePath } from "next/cache";
-import { CreateIssue, Issues } from "../hooks/userIssue";
+import { CreateIssue, GetIssue, Issues } from "../hooks/userIssue";
 
 const formSchema = z.object({
     name: z.string().min(2,{
@@ -85,5 +85,21 @@ export async function deleteProject(id:string){
     return{success:true,projects:projects?.project}
   }catch{
     return {success:false,projects:[]}
+  }
+}
+
+
+export async function getIssue(id:string){
+
+  try{
+    const issues = await GetIssue(id)
+
+    if(issues){
+      revalidatePath("/","layout")
+    }
+
+    return{success:true,issues:issues?.issues}
+  }catch{
+    return {success:false,pissues:[]}
   }
 }

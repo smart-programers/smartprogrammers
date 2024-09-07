@@ -90,6 +90,45 @@ export async function Issues(){
 
 }
 
+export async function GetIssue(id:string){
+  try{
+    deleteSchema.parse({id})
+} catch (error) {
+
+    if (error instanceof z.ZodError) {
+
+      console.error("Validation error:", error.errors);
+      return { success: false, errors: error.errors };
+    }
+
+    console.error("Unexpected error:", error);
+    return { success: false, error: "An unexpected error occurred" };
+  }
+
+  const issues = await prisma?.post.findFirst({
+  where:{
+    id:id
+  },
+  include:{
+    comments:{
+      select:{
+        user:true,
+        id:true
+      }
+    },
+    user:{
+      select:{
+        name:true,
+        id:true,
+        src:true
+      }
+    }
+  }
+  })
+  return {success:true, issues:issues}
+
+}
+
 
 export async function MyIssues(){
      
