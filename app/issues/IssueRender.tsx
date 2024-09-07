@@ -9,6 +9,7 @@ import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { GrFormPrevious } from "react-icons/gr";
 import { GrFormNext } from "react-icons/gr";
 import Link from "next/link"
+import DOMPurify from "dompurify"
 
 const detectLanguage = (code:string) => {
   switch (true) {
@@ -76,6 +77,7 @@ const detectLanguage = (code:string) => {
 };
 
 const CodeBlock = ({ code, language }:{code:string,language:string}) => {
+
   return (
     <SyntaxHighlighter language={language} style={okaidia}>
       {code}
@@ -100,7 +102,7 @@ export default function IssueRender({data}:{data:any}){
           <Card key={issue?.id} className="mb-4">
             <CardHeader>
               <CardTitle>{issue?.name}</CardTitle>
-              <CardDescription dangerouslySetInnerHTML={{ __html: issue?.description }} />
+              <CardDescription dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(issue?.description) }} />
 
             </CardHeader>
             <CardContent>

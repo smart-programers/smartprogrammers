@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from '@/components/ui/input';
 import { createComment } from '@/app/actions/comment';
+import { Textarea } from '@/components/ui/textarea';
 
 const formSchema = z.object({
   description: z.string().min(2, {
@@ -84,7 +85,7 @@ export default function Comment({ id }: { id: string }) {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <ReactQuill
+                    <Textarea
                       id="description"
                       className="mt-2"
                       {...field}
