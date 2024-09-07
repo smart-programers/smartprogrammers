@@ -4,12 +4,12 @@ import { getUser } from "../actions/user";
 import prisma from '@/prisma/client'
 
 const formSchema = z.object({
-    name: z.string().min(2,{
-      message: "Post name must be atleast two characters.",
+    description:z.string().min(2,{
+      message:"Description must have at least 2 characters"
     }),
-    description:z.string().min(6,{
-      message:"Description must have at least 6 characters"
-    }),
+    id:z.string().min(7,{
+
+    })
   })
 
 
@@ -21,10 +21,10 @@ const formSchema = z.object({
   })
 
   
-export async function CreateIssue(name:string,description:string,src:string,code:string){
+export async function CreateComment(description:string,src:string,id:string){
 
     try{
-        formSchema.parse({name,description,})
+        formSchema.parse({description,id})
     } catch (error) {
    
         if (error instanceof z.ZodError) {
@@ -55,25 +55,22 @@ export async function CreateIssue(name:string,description:string,src:string,code
 
       
       const data: any = {
-        name: name,
         description: description,
-        userId: isExisting.id
+        userId: isExisting.id,
+        postId:id
       };
       
       if (src?.trim().length > 0) {
         data.src = src;
       }
       
-      if (code?.trim().length > 0) {
-        data.code = code;
-      }
       
-      const issue = await prisma?.post.create({
+      const comment = await prisma?.comment.create({
         data: data
       });
       
 
-      return {success:true, issue:issue}
+      return {success:true, comment:comment}
 
 }
 
@@ -112,16 +109,8 @@ export async function GetIssue(id:string){
   include:{
     comments:{
       select:{
-        user:{
-          select:{
-            name:true,
-            id:true,
-            src:true
-          },
-        },
-        id:true,
-        description:true,
-        src:true
+        user:true,
+        id:true
       },orderBy:{
         createdAt:"desc"
       }

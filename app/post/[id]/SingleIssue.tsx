@@ -1,4 +1,5 @@
 "use client"
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'; 
@@ -94,6 +95,26 @@ export default function SingleIssue({issue}:{issue:any}){
               )}
             </CardContent>
           </Card>
+          {issue?.comments?.map((comment:any)=>(
+       <div key={comment?.id}><section className='flex flex-row gap-4 px-4'>
+        <Avatar>
+            {comment?.user?.src !=null ? 
+            <AvatarImage src={comment?.user?.src}/> :
+            <AvatarFallback>{comment?.user?.name?.charAt(0)}</AvatarFallback>
+}
+        </Avatar> <p className='m-2'>{comment?.user?.name}</p></section>
+        <section className="px-4">
+ <CodeBlock code={comment?.description} language={detectLanguage(comment?.description)} /></section>
+
+ {comment.src != null &&(
+    <div className='flex justify-center items-center'>
+     <img src={comment?.src} alt={`Issue ${issue?.id}`} className="mt-2 rounded-md" />
+     </div>
+ ) }
+       </div>
+          )
+
+        )}
         </>
     )
 }

@@ -13,7 +13,7 @@ const MainLayout: React.FC = () => {
       <Sidebar/>
 
       {/* Main Content */}
-      <div className="ml-24 flex-1">
+      <div className="md:ml-24 lg:ml-24 flex-1">
         <TopBar />
         <div className="grid grid-cols-1 md:grid-cols-8 gap-4 me-8">
   <div className="col-span-1 md:col-span-6">
