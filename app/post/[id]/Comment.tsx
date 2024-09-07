@@ -23,6 +23,7 @@ const formSchema = z.object({
 
 export default function Comment({ id }: { id: string }) {
   const [image, setImage] = useState<any | null>(null);
+  const [isLoading,setLoading] =useState(false)
 
   const handleImageUpload = async (e: any) => {
     const file = e.target.files[0];
@@ -48,9 +49,12 @@ export default function Comment({ id }: { id: string }) {
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
     const user = await getUser();
     if (user.success === true) {
+        setLoading(true)
       const comment = await createComment(data.description, image, id);
 
       if (comment.success === true) {
+        form.reset()
+        setLoading(false)
         toast({
           title: "Success",
           description: "Comment added successfully!"
@@ -63,6 +67,7 @@ export default function Comment({ id }: { id: string }) {
         });
       }
     } else {
+        setLoading(false)
       toast({
         title: "Authentication Required",
         description: "You must sign in!"
@@ -113,7 +118,7 @@ export default function Comment({ id }: { id: string }) {
 
          
           <div className="flex justify-end">
-            <Button type="submit">Send</Button>
+            <Button type="submit" disabled={isLoading}>Send</Button>
           </div>
         </form>
       </Form>

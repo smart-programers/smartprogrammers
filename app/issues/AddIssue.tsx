@@ -66,9 +66,14 @@ export default function AddIssue() {
 
   const { toast } = useToast()
 
+  const [isLoading,setLoading] =useState(false)
+
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+    setLoading(true)
     const project = await createIssue(data.name, data.description, image, data.code as any)
     if (project.success === true) {
+      form.reset()
+      setLoading(false)
       toast({
         title: "Successful",
         description: `${data.name} Created Successfully!`,
@@ -76,6 +81,7 @@ export default function AddIssue() {
       isOpen()
       router.refresh()
     } else {
+      setLoading(false)
       toast({
         title: "Error",
         description: `Failed to Create ${data.name}!`,
@@ -175,7 +181,7 @@ export default function AddIssue() {
                 </div>
               </div>
               <div className="flex justify-center items-center">
-              <Button type="submit">Submit Issue</Button></div>
+              <Button type="submit" disabled={isLoading}>Submit Issue</Button></div>
             </form>
           </Form>
         </DialogContent>
