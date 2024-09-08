@@ -106,7 +106,8 @@ export default function SingleIssue({issue}:{issue:any}){
             <AvatarImage src={comment?.user?.src}/> :
             <AvatarFallback>{comment?.user?.name?.charAt(0)}</AvatarFallback>
 }
-        </Avatar> <p className='m-2'>{comment?.user?.name}</p></section>
+        </Avatar>
+         <p className='m-2'>{comment?.user?.name}</p></section>
         <section className="px-4 break-words whitespace-pre-wrap overflow-hidden overflow-x-auto">
     
  <CodeBlock code={ comment?.description } language={detectLanguage(comment?.description)} />
