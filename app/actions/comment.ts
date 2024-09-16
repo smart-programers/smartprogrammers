@@ -66,7 +66,7 @@ export async function myProjects(){
       revalidatePath("/","layout")
     }
 
-    return{success:true,projects:projects?.project}
+    return{success:true,projects:projects?.projects}
   }catch{
     return {success:false,projects:[]}
   }
