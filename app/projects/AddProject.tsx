@@ -13,17 +13,21 @@ import { createProject } from "../actions/createProject"
 import { getUser } from "../actions/user"
 import { useRouter } from "next/navigation"
 
+const githubUrlPattern = /^https:\/\/github\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/;
+
 const formSchema = z.object({
-    name: z.string().min(2,{
-      message: "Project name must be atleast two characters.",
-    }),
-    description:z.string().min(6,{
-      message:"Description must have at least 6 characters"
-    }),
-    src:z.string().url({
-        message:"Invalid Url Format"
-    })
-  })
+  name: z.string().min(2, {
+    message: "Project name must be at least two characters.",
+  }),
+  description: z.string().min(6, {
+    message: "Description must have at least 6 characters",
+  }),
+  src: z.string().url({
+    message: "Invalid Url Format",
+  }).refine(val => githubUrlPattern.test(val), {
+    message: "Invalid GitHub URL",
+  }),
+});
 export default function AddProject(){
     const [open,setOpen] = useState(false)
     const router = useRouter()
