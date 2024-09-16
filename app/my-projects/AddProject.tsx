@@ -64,7 +64,7 @@ export default function AddProject(){
  
         const project = await createProject(data.name,data.description,data.src,data.visibility)
         if(project.success === true){
-          form.reset()
+            form.reset()
         toast({
             title: "Successful",
             description: `${data.name} Created Successfully!`,
@@ -82,7 +82,7 @@ export default function AddProject(){
       };
     return(
       <>
-      <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-gray-900 py-2 px-4 rounded mt-6 flex items-center" onClick={isOpen}>
+      {/* <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-gray-900 py-2 px-4 rounded mt-6 flex items-center" onClick={isOpen}>
           <FaPlus className="mr-2" /> Add Project
         </button> 
         <Dialog open={open} onOpenChange={isOpen}>
@@ -90,8 +90,8 @@ export default function AddProject(){
             <DialogContent>
             <DialogHeader>
                 <DialogTitle>Add New Project</DialogTitle>
-                </DialogHeader>
-                <Form {...form}>
+                </DialogHeader>*/}
+                 <Form {...form}> 
           <form className="mt-8 space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField
           control={form.control}
@@ -182,8 +182,6 @@ export default function AddProject(){
 
           </form>
           </Form>
-            </DialogContent>
-        </Dialog>
         </>
     )
 }

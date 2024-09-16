@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaLightbulb } from "react-icons/fa6";
 import { TbHelpSquareRoundedFilled } from "react-icons/tb"
+import { VscGithubProject } from "react-icons/vsc";
 
 export default function Sidebar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -47,6 +48,13 @@ export default function Sidebar() {
             isHovered={isHovered}
             isActive={isActive("/issues")}
             href="/issues"
+          />
+            <SidebarItem
+            icon={<VscGithubProject />}
+            label="My Projects"
+            isHovered={isHovered}
+            isActive={isActive("/my-projects")}
+            href="/my-projects"
           />
           <SidebarItem
             icon={<FaBook />}

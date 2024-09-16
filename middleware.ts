@@ -28,6 +28,12 @@ export async function middleware(req: NextRequest) {
   return NextResponse.redirect(redirectUrl)
     }
 
+    if(matchURL(req.nextUrl.pathname,"/my-projects(.*)")){
+      const redirectUrl = req.nextUrl.clone()
+      redirectUrl.pathname = '/'
+return NextResponse.redirect(redirectUrl)
+  }
+
     if(matchURL(req.nextUrl.pathname,"/projects(.*)")){
         
   return NextResponse.next()
@@ -65,6 +71,11 @@ export async function middleware(req: NextRequest) {
         
   return NextResponse.next()
     }
+
+    if(matchURL(req.nextUrl.pathname,"/my-projects(.*)")){
+        
+      return NextResponse.next()
+        }
 
     if(matchURL(req.nextUrl.pathname,"/courses(.*)")){
         
@@ -105,7 +116,8 @@ export const config = {
     '/auth/login',
     '/auth/register',
     '/courses',
-    '/projects'
+    '/projects',
+    '/my-projects'
    
     
   ],
