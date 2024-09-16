@@ -40,7 +40,8 @@ model User {
   students Student[]
   comments Comment[]
   messages Message[]
-  conversations Conversation[]
+conversations Conversation[] @relation("UserConversation")
+  sentConversations Conversation[] @relation("SenderConversation")
   groups Group[]
   projects Project[]
   posts Post[]
@@ -177,7 +178,8 @@ model Conversation{
      userId String
      senderId String
      messages Message[]
-   user User @relation(fields:[userId],references:[id])
+  user User @relation(fields: [userId],references: [id],name: "UserConversation")
+   sender User @relation(fields:[senderId],references: [id], name: "SenderConversation")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
