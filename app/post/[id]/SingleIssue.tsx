@@ -206,7 +206,9 @@ export default function SingleIssue ({ issue, user }:{issue:any,user:any}){
             {user?.id === comment?.user?.id && (
               <HoverCard>
                 <HoverCardTrigger>
+                <button className="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                   <CiMenuKebab />
+                  </button>
                 </HoverCardTrigger>
                 <HoverCardContent className='flex flex-col gap-2'>
                   <button className="block px-4 py-2 hover:bg-gray-100" onClick={() => handleEdit(comment)}>Edit</button>
