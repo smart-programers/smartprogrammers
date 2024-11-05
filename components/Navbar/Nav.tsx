@@ -67,8 +67,8 @@ export default function Sidebar() {
             icon={<VscCode />}
             label="Code"
             isHovered={isHovered}
-            isActive={isActive("/code")}
-            href="/code"
+            isActive={isActive("/codes")}
+            href="/codes"
           />
           <SidebarItem
             icon={<FaCog />}
