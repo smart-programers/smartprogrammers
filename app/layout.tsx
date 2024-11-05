@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import NextTopLoader from 'nextjs-toploader';
 import {NuqsAdapter} from 'nuqs/adapters/next'
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +45,9 @@ export default function RootLayout({
         <NextTopLoader />
         <Toaster/> 
         <NuqsAdapter>
+          <Suspense>
         {children}
+        </Suspense>
         </NuqsAdapter>
       </body>
     </html>
