@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import NextTopLoader from 'nextjs-toploader';
-
+import {NuqsAdapter} from 'nuqs/adapters/next'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,7 +43,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextTopLoader />
         <Toaster/> 
+        <NuqsAdapter>
         {children}
+        </NuqsAdapter>
       </body>
     </html>
   );

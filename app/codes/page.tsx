@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { Check, ChevronDown, Download, Moon, Sun } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Check, ChevronDown, Download, Moon, Sun, Link, Image as ImageIcon } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -10,9 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Switch } from "@/components/ui/switch"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import * as themes from 'react-syntax-highlighter/dist/esm/styles/prism'
-
+import { useQueryState } from 'nuqs'
+import html2canvas from 'html2canvas'
+import LZString from 'lz-string'
 const languages = [
   { name: 'Auto Detect', value: 'auto' },
   { name: 'JavaScript', value: 'javascript' },
@@ -62,7 +65,12 @@ function detectLanguage(code: string): string {
 }
 
 export default function Component() {
-  const [code, setCode] = useState('// Write your code here...')
+    const [compressedCode, setCompressedCode] = useQueryState('code', {
+        defaultValue: LZString.compressToEncodedURIComponent('// Write your code here...'),
+      })
+      
+      const code = LZString.decompressFromEncodedURIComponent(compressedCode) || ''
+    
   const [language, setLanguage] = useState(languages[0])
   const [detectedLanguage, setDetectedLanguage] = useState('')
   const [darkMode, setDarkMode] = useState(true)
@@ -70,6 +78,7 @@ export default function Component() {
   const [background, setBackground] = useState(true)
   const [currentTheme, setCurrentTheme] = useState(colorThemes[0])
   const [syntaxTheme, setSyntaxTheme] = useState(themes.vscDarkPlus)
+  const codeRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setSyntaxTheme(darkMode ? themes.vscDarkPlus : themes.vs)
@@ -84,6 +93,11 @@ export default function Component() {
     }
   }, [code, language])
 
+  const handleCodeChange = (newCode: string) => {
+    const compressed = LZString.compressToEncodedURIComponent(newCode)
+    setCompressedCode(compressed)
+  }
+
   const handleLanguageChange = (lang: typeof languages[0]) => {
     setLanguage(lang)
     if (lang.value !== 'auto') {
@@ -91,9 +105,32 @@ export default function Component() {
     }
   }
 
+  const exportImage = async () => {
+    if (codeRef.current) {
+      const canvas = await html2canvas(codeRef.current, {
+        scrollY: -window.scrollY,
+        height: codeRef.current.scrollHeight,
+      })
+      const id=Math.random()+Date.now()
+      const image = canvas.toDataURL("image/png")
+      const link = document.createElement('a')
+      link.href = image
+      link.download = `code-image${id}.png`
+      link.click()
+    }
+  }
+
+  const copyUrl = () => {
+    const url = new URL(window.location.href)
+    url.searchParams.set('code', code)
+    navigator.clipboard.writeText(url.toString())
+      .then(() => alert('URL copied to clipboard!'))
+      .catch((err) => console.error('Failed to copy URL: ', err))
+  }
+
   return (
     <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
-      <div className="bg-background text-foreground h-screen flex flex-col">
+      <div className="bg-background text-foreground min-h-screen flex flex-col">
         <header className="border-b border-border">
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
             <div className="flex items-center space-x-2">
@@ -105,16 +142,31 @@ export default function Component() {
               <Button variant="ghost" size="sm">
                 About
               </Button>
-              <Button variant="default" size="sm">
-                <Download className="w-4 h-4 mr-2" />
-                Export Image
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="default" size="sm">
+                    <Download className="w-4 h-4 mr-2" />
+                    Export
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={exportImage}>
+                    <ImageIcon className="w-4 h-4 mr-2" />
+                    Download Image
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={copyUrl}>
+                    <Link className="w-4 h-4 mr-2" />
+                    Copy URL
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </header>
 
-        <main className="flex-1 container mx-auto p-4 flex flex-col items-center justify-center">
+        <main className="flex-1 container mx-auto p-4 flex flex-col items-center justify-center overflow-hidden">
           <div
+            ref={codeRef}
             className={`w-full max-w-4xl rounded-lg shadow-2xl ${
               background ? currentTheme.class : 'bg-background'
             } p-4 md:p-8`}
@@ -130,32 +182,34 @@ export default function Component() {
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
               </div>
-              <div className="relative">
-                <textarea
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  className="w-full bg-transparent resize-none focus:outline-none font-mono text-sm absolute top-0 left-0 overflow-hidden whitespace-pre"
-                  style={{
-                    color: 'transparent',
-                    caretColor: darkMode ? 'white' : 'black',
-                    zIndex: 1,
-                    height: '100%',
-                  }}
-                  spellCheck="false"
-                />
-                <SyntaxHighlighter
-                  language={detectedLanguage}
-                  style={syntaxTheme}
-                  customStyle={{
-                    margin: 0,
-                    padding: 0,
-                    background: 'transparent',
-                  }}
-                  className="pointer-events-none"
-                >
-                  {code}
-                </SyntaxHighlighter>
-              </div>
+              <ScrollArea className="h-[400px] w-full">
+                <div className="relative">
+                  <textarea
+                    value={code}
+                    onChange={(e) => handleCodeChange(e.target.value)}
+                    className="w-full bg-transparent resize-none focus:outline-none font-mono text-sm absolute top-0 left-0 overflow-hidden whitespace-pre"
+                    style={{
+                      color: 'transparent',
+                      caretColor: darkMode ? 'white' : 'black',
+                      zIndex: 1,
+                      height: '100%',
+                    }}
+                    spellCheck="false"
+                  />
+                  <SyntaxHighlighter
+                    language={detectedLanguage}
+                    style={syntaxTheme}
+                    customStyle={{
+                      margin: 0,
+                      padding: 0,
+                      background: 'transparent',
+                    }}
+                    className="pointer-events-none"
+                  >
+                    {code}
+                  </SyntaxHighlighter>
+                </div>
+              </ScrollArea>
             </div>
           </div>
         </main>
