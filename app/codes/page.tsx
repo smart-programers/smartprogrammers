@@ -122,7 +122,7 @@ export default function Component() {
 
   const copyUrl = () => {
     const url = new URL(window.location.href)
-    url.searchParams.set('code', code)
+    url.searchParams.set('code', compressedCode)
     navigator.clipboard.writeText(url.toString())
       .then(() => alert('URL copied to clipboard!'))
       .catch((err) => console.error('Failed to copy URL: ', err))
