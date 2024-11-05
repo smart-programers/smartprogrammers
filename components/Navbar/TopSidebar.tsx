@@ -11,7 +11,7 @@ import { RiMenu2Line } from "react-icons/ri";
 import { IoIosClose } from "react-icons/io";
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
-import { VscGithubProject } from "react-icons/vsc";
+import { VscCode, VscGithubProject } from "react-icons/vsc";
 
 export default function TopSidebar() {
   const [isHovered, setIsHovered] = useState(true);
@@ -79,6 +79,13 @@ export default function TopSidebar() {
             isHovered={isHovered}
             isActive={isActive("/courses")}
             href="/courses"
+          />
+            <SidebarItem
+            icon={<VscCode />}
+            label="Code"
+            isHovered={isHovered}
+            isActive={isActive("/code")}
+            href="/code"
           />
           <SidebarItem
             icon={<FaCog />}

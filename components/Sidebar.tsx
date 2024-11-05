@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaHome, FaBook, FaComment, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { VscCode } from 'react-icons/vsc';
 
 export interface SidebarProps {
   active?: string;
@@ -21,6 +22,9 @@ const Sidebar: React.FC<SidebarProps> = ({ active }) => {
           </li>
           <li className={`${active === 'profile' ? 'bg-blue-800' : ''} p-3 rounded flex items-center`}>
             <FaUser className="inline-block mr-3" /> Profile
+          </li>
+          <li className={`${active === 'settings' ? 'bg-blue-800' : ''} p-3 rounded flex items-center`}>
+            <VscCode className="inline-block mr-3" /> Code
           </li>
           <li className={`${active === 'settings' ? 'bg-blue-800' : ''} p-3 rounded flex items-center`}>
             <FaCog className="inline-block mr-3" /> Settings
