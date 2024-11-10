@@ -9,7 +9,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import { useToast } from "@/components/ui/use-toast"
 import { Register } from '@/app/actions/register';
-import EkiliRelay from '../../../lib/ekiliRelay';
+import EkiliRelay from 'ekilirelay';
 
 const formSchema = z.object({
   email: z.string().email({
