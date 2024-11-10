@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,8 +10,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FaUsers, FaRocket, FaCode } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
 
 export function LearnMoreDialog() {
+  const router  = useRouter()
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -47,10 +50,13 @@ export function LearnMoreDialog() {
         </DialogHeader>
         <DialogFooter>
           <Button
+            onClick={()=>{
+              router.push('auth/register')
+            }}
             variant="outline"
             className="bg-yellow-500 text-white dark:bg-yellow-600 hover:bg-yellow-600 dark:hover:bg-yellow-500"
           >
-            Get Started 🚀
+            JOIN 🚀
           </Button>
         </DialogFooter>
       </DialogContent>
