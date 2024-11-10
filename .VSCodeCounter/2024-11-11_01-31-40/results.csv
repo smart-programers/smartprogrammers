@@ -1,0 +1,84 @@
+"filename", "language", "TypeScript", "JSON", "TypeScript JSX", "CSS", "JSON with Comments", "Prisma", "JavaScript", "Markdown", "comment", "blank", "total"
+"/home/tach/tach/nextjs/smartprogrammers/.eslintrc.json", "JSON", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/home/tach/tach/nextjs/smartprogrammers/README.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 85, 0, 49, 134
+"/home/tach/tach/nextjs/smartprogrammers/app/actions/auth.ts", "TypeScript", 33, 0, 0, 0, 0, 0, 0, 0, 0, 1, 34
+"/home/tach/tach/nextjs/smartprogrammers/app/actions/comment.ts", "TypeScript", 102, 0, 0, 0, 0, 0, 0, 0, 0, 42, 144
+"/home/tach/tach/nextjs/smartprogrammers/app/actions/createProject.ts", "TypeScript", 107, 0, 0, 0, 0, 0, 0, 0, 0, 34, 141
+"/home/tach/tach/nextjs/smartprogrammers/app/actions/issues.ts", "TypeScript", 75, 0, 0, 0, 0, 0, 0, 0, 0, 31, 106
+"/home/tach/tach/nextjs/smartprogrammers/app/actions/login.ts", "TypeScript", 30, 0, 0, 0, 0, 0, 0, 0, 0, 8, 38
+"/home/tach/tach/nextjs/smartprogrammers/app/actions/register.ts", "TypeScript", 26, 0, 0, 0, 0, 0, 0, 0, 0, 8, 34
+"/home/tach/tach/nextjs/smartprogrammers/app/actions/sendEmail.ts", "TypeScript", 25, 0, 0, 0, 0, 0, 0, 0, 0, 7, 32
+"/home/tach/tach/nextjs/smartprogrammers/app/actions/user.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 0, 0, 0, 6, 24
+"/home/tach/tach/nextjs/smartprogrammers/app/api/register/route.ts", "TypeScript", 35, 0, 0, 0, 0, 0, 0, 0, 0, 10, 45
+"/home/tach/tach/nextjs/smartprogrammers/app/auth/login/page.tsx", "TypeScript JSX", 0, 0, 162, 0, 0, 0, 0, 0, 2, 21, 185
+"/home/tach/tach/nextjs/smartprogrammers/app/auth/page.tsx", "TypeScript JSX", 0, 0, 185, 0, 0, 0, 0, 0, 0, 22, 207
+"/home/tach/tach/nextjs/smartprogrammers/app/auth/register/page.tsx", "TypeScript JSX", 0, 0, 201, 0, 0, 0, 0, 0, 4, 29, 234
+"/home/tach/tach/nextjs/smartprogrammers/app/codes/page.tsx", "TypeScript JSX", 0, 0, 291, 0, 0, 0, 0, 0, 0, 22, 313
+"/home/tach/tach/nextjs/smartprogrammers/app/courses/page.tsx", "TypeScript JSX", 0, 0, 44, 0, 0, 0, 0, 0, 4, 12, 60
+"/home/tach/tach/nextjs/smartprogrammers/app/globals.css", "CSS", 0, 0, 0, 66, 0, 0, 0, 0, 0, 3, 69
+"/home/tach/tach/nextjs/smartprogrammers/app/hooks/UserLogin.ts", "TypeScript", 63, 0, 0, 0, 0, 0, 0, 0, 0, 18, 81
+"/home/tach/tach/nextjs/smartprogrammers/app/hooks/UserProjects.ts", "TypeScript", 175, 0, 0, 0, 0, 0, 0, 0, 0, 59, 234
+"/home/tach/tach/nextjs/smartprogrammers/app/hooks/UserRegister.ts", "TypeScript", 41, 0, 0, 0, 0, 0, 0, 0, 0, 16, 57
+"/home/tach/tach/nextjs/smartprogrammers/app/hooks/cookie.ts", "TypeScript", 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3
+"/home/tach/tach/nextjs/smartprogrammers/app/hooks/userComment.ts", "TypeScript", 188, 0, 0, 0, 0, 0, 0, 0, 0, 71, 259
+"/home/tach/tach/nextjs/smartprogrammers/app/hooks/userIssue.ts", "TypeScript", 155, 0, 0, 0, 0, 0, 0, 0, 0, 55, 210
+"/home/tach/tach/nextjs/smartprogrammers/app/issues/AddIssue.tsx", "TypeScript JSX", 0, 0, 178, 0, 0, 0, 0, 0, 0, 14, 192
+"/home/tach/tach/nextjs/smartprogrammers/app/issues/IssueRender.tsx", "TypeScript JSX", 0, 0, 135, 0, 0, 0, 0, 0, 0, 20, 155
+"/home/tach/tach/nextjs/smartprogrammers/app/issues/layout.tsx", "TypeScript JSX", 0, 0, 14, 0, 0, 0, 0, 0, 2, 5, 21
+"/home/tach/tach/nextjs/smartprogrammers/app/issues/page.tsx", "TypeScript JSX", 0, 0, 15, 0, 0, 0, 0, 0, 0, 9, 24
+"/home/tach/tach/nextjs/smartprogrammers/app/layout.tsx", "TypeScript JSX", 0, 0, 49, 0, 0, 0, 0, 0, 0, 7, 56
+"/home/tach/tach/nextjs/smartprogrammers/app/login/page.tsx", "TypeScript JSX", 0, 0, 9, 0, 0, 0, 0, 0, 0, 3, 12
+"/home/tach/tach/nextjs/smartprogrammers/app/my-articles/page.tsx", "TypeScript JSX", 0, 0, 331, 0, 0, 0, 0, 0, 0, 23, 354
+"/home/tach/tach/nextjs/smartprogrammers/app/my-projects/AddProject.tsx", "TypeScript JSX", 0, 0, 159, 0, 0, 0, 0, 0, 0, 19, 178
+"/home/tach/tach/nextjs/smartprogrammers/app/my-projects/ProjectRender.tsx", "TypeScript JSX", 0, 0, 220, 0, 0, 0, 0, 0, 4, 14, 238
+"/home/tach/tach/nextjs/smartprogrammers/app/my-projects/layout.tsx", "TypeScript JSX", 0, 0, 14, 0, 0, 0, 0, 0, 2, 5, 21
+"/home/tach/tach/nextjs/smartprogrammers/app/my-projects/page.tsx", "TypeScript JSX", 0, 0, 16, 0, 0, 0, 0, 0, 2, 8, 26
+"/home/tach/tach/nextjs/smartprogrammers/app/not-found.tsx", "TypeScript JSX", 0, 0, 31, 0, 0, 0, 0, 0, 2, 2, 35
+"/home/tach/tach/nextjs/smartprogrammers/app/page.tsx", "TypeScript JSX", 0, 0, 19, 0, 0, 0, 0, 0, 5, 13, 37
+"/home/tach/tach/nextjs/smartprogrammers/app/post/[id]/Comment.tsx", "TypeScript JSX", 0, 0, 112, 0, 0, 0, 0, 0, 0, 16, 128
+"/home/tach/tach/nextjs/smartprogrammers/app/post/[id]/SingleIssue.tsx", "TypeScript JSX", 0, 0, 320, 0, 0, 0, 0, 0, 0, 17, 337
+"/home/tach/tach/nextjs/smartprogrammers/app/post/[id]/layout.tsx", "TypeScript JSX", 0, 0, 14, 0, 0, 0, 0, 0, 2, 5, 21
+"/home/tach/tach/nextjs/smartprogrammers/app/post/[id]/page.tsx", "TypeScript JSX", 0, 0, 19, 0, 0, 0, 0, 0, 0, 5, 24
+"/home/tach/tach/nextjs/smartprogrammers/app/projects/AddProject.tsx", "TypeScript JSX", 0, 0, 169, 0, 0, 0, 0, 0, 0, 20, 189
+"/home/tach/tach/nextjs/smartprogrammers/app/projects/FormProject.tsx", "TypeScript JSX", 0, 0, 166, 0, 0, 0, 0, 0, 9, 19, 194
+"/home/tach/tach/nextjs/smartprogrammers/app/projects/layout.tsx", "TypeScript JSX", 0, 0, 14, 0, 0, 0, 0, 0, 2, 5, 21
+"/home/tach/tach/nextjs/smartprogrammers/app/projects/page.tsx", "TypeScript JSX", 0, 0, 67, 0, 0, 0, 0, 0, 5, 11, 83
+"/home/tach/tach/nextjs/smartprogrammers/components.json", "JSON", 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 17
+"/home/tach/tach/nextjs/smartprogrammers/components/CourseCard.tsx", "TypeScript JSX", 0, 0, 40, 0, 0, 0, 0, 0, 0, 4, 44
+"/home/tach/tach/nextjs/smartprogrammers/components/Courses.tsx", "TypeScript JSX", 0, 0, 68, 0, 0, 0, 0, 0, 2, 5, 75
+"/home/tach/tach/nextjs/smartprogrammers/components/LearnMoreDialog.tsx", "TypeScript JSX", 0, 0, 58, 0, 0, 0, 0, 0, 0, 2, 60
+"/home/tach/tach/nextjs/smartprogrammers/components/MainSection.tsx", "TypeScript JSX", 0, 0, 36, 0, 0, 0, 0, 0, 5, 5, 46
+"/home/tach/tach/nextjs/smartprogrammers/components/Navbar/Nav.tsx", "TypeScript JSX", 0, 0, 101, 0, 0, 0, 0, 0, 0, 8, 109
+"/home/tach/tach/nextjs/smartprogrammers/components/Navbar/TopSidebar.tsx", "TypeScript JSX", 0, 0, 121, 0, 0, 0, 0, 0, 0, 8, 129
+"/home/tach/tach/nextjs/smartprogrammers/components/Services.tsx", "TypeScript JSX", 0, 0, 54, 0, 0, 0, 0, 0, 1, 3, 58
+"/home/tach/tach/nextjs/smartprogrammers/components/Sidebar.tsx", "TypeScript JSX", 0, 0, 38, 0, 0, 0, 0, 0, 0, 4, 42
+"/home/tach/tach/nextjs/smartprogrammers/components/ToggleTheme.tsx", "TypeScript JSX", 0, 0, 38, 0, 0, 0, 0, 0, 3, 8, 49
+"/home/tach/tach/nextjs/smartprogrammers/components/TopBar.tsx", "TypeScript JSX", 0, 0, 55, 0, 0, 0, 0, 0, 10, 14, 79
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/avatar.tsx", "TypeScript JSX", 0, 0, 44, 0, 0, 0, 0, 0, 0, 7, 51
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/button.tsx", "TypeScript JSX", 0, 0, 51, 0, 0, 0, 0, 0, 0, 6, 57
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/card.tsx", "TypeScript JSX", 0, 0, 71, 0, 0, 0, 0, 0, 0, 9, 80
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/dialog.tsx", "TypeScript JSX", 0, 0, 109, 0, 0, 0, 0, 0, 0, 14, 123
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/dropdown-menu.tsx", "TypeScript JSX", 0, 0, 182, 0, 0, 0, 0, 0, 0, 19, 201
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/form.tsx", "TypeScript JSX", 0, 0, 153, 0, 0, 0, 0, 0, 0, 26, 179
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/hover-card.tsx", "TypeScript JSX", 0, 0, 23, 0, 0, 0, 0, 0, 0, 7, 30
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/input.tsx", "TypeScript JSX", 0, 0, 21, 0, 0, 0, 0, 0, 0, 5, 26
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/label.tsx", "TypeScript JSX", 0, 0, 21, 0, 0, 0, 0, 0, 0, 6, 27
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/scroll-area.tsx", "TypeScript JSX", 0, 0, 43, 0, 0, 0, 0, 0, 0, 6, 49
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/switch.tsx", "TypeScript JSX", 0, 0, 25, 0, 0, 0, 0, 0, 0, 5, 30
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/tabs.tsx", "TypeScript JSX", 0, 0, 48, 0, 0, 0, 0, 0, 0, 8, 56
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/textarea.tsx", "TypeScript JSX", 0, 0, 20, 0, 0, 0, 0, 0, 0, 5, 25
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/toast.tsx", "TypeScript JSX", 0, 0, 116, 0, 0, 0, 0, 0, 0, 14, 130
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/toaster.tsx", "TypeScript JSX", 0, 0, 32, 0, 0, 0, 0, 0, 0, 4, 36
+"/home/tach/tach/nextjs/smartprogrammers/components/ui/use-toast.ts", "TypeScript", 160, 0, 0, 0, 0, 0, 0, 0, 3, 32, 195
+"/home/tach/tach/nextjs/smartprogrammers/lib/ekiliRelay.ts", "TypeScript", 37, 0, 0, 0, 0, 0, 0, 0, 27, 6, 70
+"/home/tach/tach/nextjs/smartprogrammers/lib/utils.ts", "TypeScript", 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"/home/tach/tach/nextjs/smartprogrammers/middleware.ts", "TypeScript", 79, 0, 0, 0, 0, 0, 0, 0, 0, 46, 125
+"/home/tach/tach/nextjs/smartprogrammers/next.config.mjs", "JavaScript", 0, 0, 0, 0, 0, 0, 19, 0, 1, 2, 22
+"/home/tach/tach/nextjs/smartprogrammers/package-lock.json", "JSON", 0, 9515, 0, 0, 0, 0, 0, 0, 0, 1, 9516
+"/home/tach/tach/nextjs/smartprogrammers/package.json", "JSON", 0, 72, 0, 0, 0, 0, 0, 0, 0, 1, 73
+"/home/tach/tach/nextjs/smartprogrammers/postcss.config.mjs", "JavaScript", 0, 0, 0, 0, 0, 0, 6, 0, 1, 2, 9
+"/home/tach/tach/nextjs/smartprogrammers/prisma/client.ts", "TypeScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 3, 10
+"/home/tach/tach/nextjs/smartprogrammers/prisma/schema.prisma", "Prisma", 0, 0, 0, 0, 0, 160, 0, 0, 4, 24, 188
+"/home/tach/tach/nextjs/smartprogrammers/tailwind.config.ts", "TypeScript", 78, 0, 0, 0, 0, 0, 0, 0, 0, 2, 80
+"/home/tach/tach/nextjs/smartprogrammers/tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 26, 0, 0, 0, 0, 1, 27
+"Total", "-", 1440, 9607, 4522, 66, 26, 160, 25, 85, 102, 1091, 17124
