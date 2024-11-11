@@ -34,7 +34,7 @@ export function RankingsDialog() {
         const data = await response.json();
 
         // Assuming `user_public` array contains the developers you want to display
-        const developersData = data.user_public.map((username: string) => ({
+        const developersData = data.user.map((username: string) => ({
           username,
           contributions: Math.floor(Math.random() * 1000), // Placeholder contribution count, replace with actual logic
         }));
