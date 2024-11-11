@@ -1,19 +1,28 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FaUsers, FaRocket, FaCode } from "react-icons/fa";
-import { useRouter } from 'next/navigation';
+import { FaStar } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+
+// Sample developer data (replace this with actual data from an API or database)
+const developers = [
+  { rank: 1, username: "dev_master", contributions: 1550 },
+  { rank: 2, username: "code_champion", contributions: 1320 },
+  { rank: 3, username: "tech_wizard", contributions: 1205 },
+  { rank: 4, username: "data_guru", contributions: 1150 },
+  { rank: 5, username: "tanzania_dev", contributions: 1100 },
+];
 
 export function RankingsDialog() {
-  const router  = useRouter()
+  const router = useRouter();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -24,37 +33,37 @@ export function RankingsDialog() {
           Rankings
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[825px] sm:max-h-[500px]">
+
+      <DialogContent className="sm:max-w-[825px] sm:max-h-[500px] p-6">
         <DialogHeader>
-          <DialogTitle>Github Contributions based rankings! 🌟</DialogTitle>
-          <DialogDescription>
-            <div className="flex items-center gap-2">
-              <FaUsers className="text-yellow-500 dark:text-yellow-400" />
-              <p>
-                Become a part of a thriving community of Tanzanian developers! Whether you're a beginner or an expert, Smart Programmers offers resources to help you grow.
-              </p>
-            </div>
-            <div className="mt-4 flex items-center gap-2">
-              <FaRocket className="text-yellow-500 dark:text-yellow-400" />
-              <p>
-                Participate in collaborative projects 🚀 and hands-on workshops to boost your coding skills.
-              </p>
-            </div>
-            <div className="mt-4 flex items-center gap-2">
-              <FaCode className="text-yellow-500 dark:text-yellow-400" />
-              <p>
-                Access top-tier courses 📚 and resources to accelerate your development journey.
-              </p>
-            </div>
-          </DialogDescription>
+          <DialogTitle className="text-center text-2xl font-bold mb-4">
+            🌟 Github Contribution Rankings
+          </DialogTitle>
         </DialogHeader>
-        <DialogFooter>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {developers.map((dev) => (
+            <div
+              key={dev.rank}
+              className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 flex flex-col items-center text-center transition-all hover:shadow-lg"
+            >
+              <div className="flex items-center gap-2">
+                <FaStar className="text-yellow-500 dark:text-yellow-400" />
+                <span className="font-semibold text-lg">{dev.rank}</span>
+              </div>
+              <h3 className="text-xl font-bold mt-2">{dev.username}</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                {dev.contributions} contributions
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <DialogFooter className="mt-6 flex justify-center">
           <Button
-            onClick={()=>{
-              router.push('auth/register')
-            }}
+            onClick={() => router.push("auth/register")}
             variant="outline"
-            className="bg-yellow-500 text-white dark:bg-yellow-600 hover:bg-yellow-600 dark:hover:bg-yellow-500"
+            className="bg-yellow-500 text-white dark:bg-yellow-600 hover:bg-yellow-600 dark:hover:bg-yellow-500 px-6 py-3 rounded-lg font-semibold"
           >
             JOIN 🚀
           </Button>
