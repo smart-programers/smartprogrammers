@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,14 +12,35 @@ import {
 import { FaStar } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
-const developers = Array.from({ length: 30 }, (_, i) => ({
-  rank: i + 1,
-  username: `dev_${i + 1}`,
-  contributions: Math.floor(Math.random() * 1500 + 100),
-}));
+// Define the type for the developer data.
+interface Developer {
+  username: string;
+  contributions: number;
+}
 
 export function RankingsDialog() {
   const router = useRouter();
+  
+  // State types
+  const [developers, setDevelopers] = useState<Developer[]>([]); // Array of Developer objects
+  const [loading, setLoading] = useState<boolean>(true); // Boolean for loading state
+  const [error, setError] = useState<string | null>(null); // Error state that can be string or null
+
+  useEffect(() => {
+    async function fetchDevelopers() {
+      try {
+        const response = await fetch("https://committers.top/rank_only/tanzania.json");
+        if (!response.ok) throw new Error("Failed to fetch data");
+        const data: Developer[] = await response.json(); // Expecting an array of developers
+        setDevelopers(data);
+      } catch (error: any) {
+        setError(error.message); // Cast to any to access the message
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchDevelopers();
+  }, []);
 
   return (
     <Dialog>
@@ -38,23 +60,29 @@ export function RankingsDialog() {
           </DialogTitle>
         </DialogHeader>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[300px] overflow-y-auto">
-          {developers.map((dev) => (
-            <div
-              key={dev.rank}
-              className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 flex flex-col items-center text-center transition-all hover:shadow-lg"
-            >
-              <div className="flex items-center gap-2">
-                <FaStar className="text-yellow-500 dark:text-yellow-400" />
-                <span className="font-semibold text-lg">{dev.rank}</span>
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">Error: {error}</p>
+        ) : (
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[300px] overflow-y-auto">
+            {developers.map((dev, index) => (
+              <div
+                key={index}
+                className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 flex flex-col items-center text-center transition-all hover:shadow-lg"
+              >
+                <div className="flex items-center gap-2">
+                  <FaStar className="text-yellow-500 dark:text-yellow-400" />
+                  <span className="font-semibold text-lg">{index + 1}</span>
+                </div>
+                <h3 className="text-xl font-bold mt-2">{dev.username}</h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {dev.contributions} contributions
+                </p>
               </div>
-              <h3 className="text-xl font-bold mt-2">{dev.username}</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {dev.contributions} contributions
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         <DialogFooter className="mt-6 flex justify-center">
           <Button
