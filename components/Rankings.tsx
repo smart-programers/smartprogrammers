@@ -19,7 +19,7 @@ interface Developer {
 
 export function RankingsDialog() {
   const router = useRouter();
-  
+
   const [developers, setDevelopers] = useState<Developer[]>([]); // Array of Developer objects
   const [loading, setLoading] = useState<boolean>(true); // Boolean for loading state
   const [error, setError] = useState<string | null>(null); // Error state that can be string or null
@@ -29,8 +29,17 @@ export function RankingsDialog() {
       try {
         const response = await fetch("https://committers.top/rank_only/tanzania.json");
         if (!response.ok) throw new Error("Failed to fetch data");
-        const data: Developer[] = await response.json(); // Expecting an array of developers
-        setDevelopers(data);
+        
+        // Parsing the response, and pick the array that contains user data
+        const data = await response.json();
+
+        // Assuming `user_public` array contains the developers you want to display
+        const developersData = data.user_public.map((username: string) => ({
+          username,
+          contributions: Math.floor(Math.random() * 1000), // Placeholder contribution count, replace with actual logic
+        }));
+
+        setDevelopers(developersData);
       } catch (error: any) {
         setError(error.message); // Casting to any to access the message
       } finally {
@@ -54,7 +63,7 @@ export function RankingsDialog() {
       <DialogContent className="sm:max-w-[825px] sm:max-h-[500px] p-6">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold mb-4">
-            🌟 Github Contribution Rankings
+            🌟 Github Contribution Rankings in Tz
           </DialogTitle>
         </DialogHeader>
 
@@ -75,7 +84,7 @@ export function RankingsDialog() {
                 </div>
                 <h3 className="text-xl font-bold mt-2">{dev.username}</h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {dev.contributions} contributions
+                  {/* {dev.contributions} contributions */}
                 </p>
               </div>
             ))}
