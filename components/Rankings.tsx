@@ -12,7 +12,6 @@ import {
 import { FaStar } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
-// Define the type for the developer data.
 interface Developer {
   username: string;
   contributions: number;
@@ -21,7 +20,6 @@ interface Developer {
 export function RankingsDialog() {
   const router = useRouter();
   
-  // State types
   const [developers, setDevelopers] = useState<Developer[]>([]); // Array of Developer objects
   const [loading, setLoading] = useState<boolean>(true); // Boolean for loading state
   const [error, setError] = useState<string | null>(null); // Error state that can be string or null
@@ -34,7 +32,7 @@ export function RankingsDialog() {
         const data: Developer[] = await response.json(); // Expecting an array of developers
         setDevelopers(data);
       } catch (error: any) {
-        setError(error.message); // Cast to any to access the message
+        setError(error.message); // Casting to any to access the message
       } finally {
         setLoading(false);
       }
