@@ -12,6 +12,7 @@ import {
 import ToggleTheme from './ToggleTheme';
 import { getUser } from '@/app/actions/user';
 import TopSidebar from './Navbar/TopSidebar';
+import { RankingsDialog } from './Rankings';
 
 export default async function TopBar(){
   
@@ -25,6 +26,7 @@ export default async function TopBar(){
         <Link href="/" className=''><b><span className='text-yellow-500'>Smart</span></b>Programmers</Link>
       </div>
       <div className="ml-4 flex items-center space-x-4">
+        <RankingsDialog />
         {/* Theme Toggle */}
       <ToggleTheme/>
 
