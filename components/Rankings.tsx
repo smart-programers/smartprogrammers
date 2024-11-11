@@ -24,7 +24,7 @@ export function RankingsDialog() {
           Rankings
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[825px] sm:max-h-[500px]">
         <DialogHeader>
           <DialogTitle>Github Contributions based rankings! 🌟</DialogTitle>
           <DialogDescription>
