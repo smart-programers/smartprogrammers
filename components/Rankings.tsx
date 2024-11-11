@@ -11,14 +11,11 @@ import {
 import { FaStar } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
-// Sample developer data (replace this with actual data from an API or database)
-const developers = [
-  { rank: 1, username: "dev_master", contributions: 1550 },
-  { rank: 2, username: "code_champion", contributions: 1320 },
-  { rank: 3, username: "tech_wizard", contributions: 1205 },
-  { rank: 4, username: "data_guru", contributions: 1150 },
-  { rank: 5, username: "tanzania_dev", contributions: 1100 },
-];
+const developers = Array.from({ length: 30 }, (_, i) => ({
+  rank: i + 1,
+  username: `dev_${i + 1}`,
+  contributions: Math.floor(Math.random() * 1500 + 100),
+}));
 
 export function RankingsDialog() {
   const router = useRouter();
@@ -41,7 +38,7 @@ export function RankingsDialog() {
           </DialogTitle>
         </DialogHeader>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[300px] overflow-y-auto">
           {developers.map((dev) => (
             <div
               key={dev.rank}
