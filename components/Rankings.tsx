@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,9 +20,9 @@ interface Developer {
 export function RankingsDialog() {
   const router = useRouter();
 
-  const [developers, setDevelopers] = useState<Developer[]>([]); // Array of Developer objects
-  const [loading, setLoading] = useState<boolean>(true); // Boolean for loading state
-  const [error, setError] = useState<string | null>(null); // Error state that can be string or null
+  const [developers, setDevelopers] = useState<Developer[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchDevelopers() {
@@ -30,18 +30,19 @@ export function RankingsDialog() {
         const response = await fetch("https://committers.top/rank_only/tanzania.json");
         if (!response.ok) throw new Error("Failed to fetch data");
         
-        // Parsing the response, and pick the array that contains user data
         const data = await response.json();
-
-        // Assuming `user_public` array contains the developers you want to display
-        const developersData = data.user.map((username: string) => ({
-          username,
-          contributions: Math.floor(Math.random() * 1000), // Placeholder contribution count, replace with actual logic
-        }));
-
+        const developersData = (data.user || []).map((username: string, idx: number) => {
+          let contributions = 0;
+          if (data.contributions && Array.isArray(data.contributions)) {
+            contributions = data.contributions[idx] || 0;
+          } else {
+            contributions = Math.floor(Math.random() * 1000);
+          }
+          return { username, contributions };
+        });
         setDevelopers(developersData);
       } catch (error: any) {
-        setError(error.message); // Casting to any to access the message
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -73,7 +74,7 @@ export function RankingsDialog() {
           <p className="text-center text-red-500">Error: {error}</p>
         ) : (
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[300px] overflow-y-auto">
-            {developers.map((dev, index) => (
+            {developers.map((dev: Developer, index: number) => (
               <div
                 key={index}
                 className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 flex flex-col items-center text-center transition-all hover:shadow-lg"
@@ -83,8 +84,8 @@ export function RankingsDialog() {
                   <span className="font-semibold text-lg">{index + 1}</span>
                 </div>
                 <h3 className="text-xl font-bold mt-2">{dev.username}</h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {/* {dev.contributions} contributions */}
+                <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                  {dev.contributions} contributions
                 </p>
               </div>
             ))}
@@ -93,9 +94,10 @@ export function RankingsDialog() {
 
         <DialogFooter className="mt-6 flex justify-center">
           <Button
-            onClick={() => router.push("auth/register")}
+            onClick={() => router.push("/auth/register")}
             variant="outline"
-            className="bg-yellow-500 text-white dark:bg-yellow-600 hover:bg-yellow-600 dark:hover:bg-yellow-500 px-6 py-3 rounded-lg font-semibold"
+            className="bg-yellow-500 text-white dark:bg-yellow-600 hover:bg-yellow-600 dark:hover:bg-yellow-500 px-6 py-3 rounded-lg font-semibold shadow-md"
+            aria-label="Join Smart Programmers"
           >
             JOIN 🚀
           </Button>
